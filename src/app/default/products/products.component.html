@@ -1,0 +1,23 @@
+
+
+<div class="row">
+    <!-- Team member -->
+    <div *ngFor="let pro of allProducts" class="col-xs-12 col-sm-6 col-md-4">
+        <div class="image-flip">
+            <div class="mainflip" >
+                <div class="frontside" style="margin:5px 0px">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <p><img class=" img-fluid" src="assets/phone.jpg"></p>
+                            <h4 class="card-title">pro.name</h4>
+                            <p class="card-text">pro.desc</p>
+                            <p class="card-text">pro.price</p>
+                            <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-cart-plus"></i> Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,13 @@
+input.ng-invalid.ng-touched{
+    border: 1px solid red;
+  }
+  .client-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  .user-log{
+    background-color: #e4e3e3;
+    color: #0c0c3c;
+  }

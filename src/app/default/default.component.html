@@ -1,0 +1,43 @@
+<div class="wrapper" style="max-width: 100%;">
+    <!-- topbar -->
+    <app-topbar></app-topbar>
+
+        <div class="row" style="margin-top: 5%;">
+            <!-- left sidebar -->
+            <div class="col-md-2">
+                <app-leftsidebar></app-leftsidebar>
+            </div>
+            <!-- main content -->
+            <div class="col-md-7">
+                <router-outlet></router-outlet>
+            </div>
+            <!-- right side bar for registration -->
+            <div class="col-md-3">
+                <app-registration></app-registration>
+            </div>
+        </div>
+
+</div>
+
+<ng-template #LoginModal let-modal>
+    <div class="modal-header">
+    <h4 class="modal-title">Login</h4>
+    </div>
+    <div class="modal-body">
+       <app-login></app-login>
+    </div>
+</ng-template>
+
+<!-- <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Login</h4>
+            </div>
+            <div class="modal-body">
+               <app-login></app-login>
+            </div>
+      </div>
+    </div>
+</div> -->
+              

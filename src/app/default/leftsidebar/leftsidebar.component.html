@@ -1,0 +1,54 @@
+<div style="padding-left: 10px;padding-top: 10px;">
+    <a class="btn btn-primary btn-block mb-3" style="color:white;" (click)="getAllProduct()">All Products</a>
+
+    <div class="card" style="margin-bottom: 5px; ">
+    <div class="card-header" style="margin: 0; padding: 10px;">
+        <h4 class="card-title float-left" style="margin: 0;">Category</h4>
+        <div class="card-tools float-right">
+            <span class="btn btn-tool" (click)="isCollapsed1 = !isCollapsed1">
+                <i *ngIf="isCollapsed1" class="fas fa-plus"></i>
+                <i *ngIf="!isCollapsed1" class="fas fa-minus"></i>
+            </span>
+        </div>
+    
+    </div>
+    <div *ngFor="let cat of categories" class="card-body p-0" [ngbCollapse]="isCollapsed1">
+        <ul class="nav nav-pills flex-column">
+        <li class="nav-item active" style="cursor: pointer;" (click)="getProductByCat(cat.id)">
+            <a class="nav-link" >
+               {{cat.name}}
+               <!-- [routerLink]="['products/',cat.id]" -->
+                <!-- <span class="badge bg-primary float-right" style="color: white;">{{categories.length}}</span> -->
+            </a>
+        </li>
+        </ul>
+        
+    </div>
+    <!-- /.card-body -->
+    </div>
+
+    <div class="card" style="margin-bottom: 5px">
+        <div class="card-header" style="margin: 0; padding: 10px;">
+            <h4 class="card-title float-left" style="margin: 0;">Brand</h4>
+            <div class="card-tools float-right">
+                <span class="btn btn-tool" (click)="isCollapsed2 = !isCollapsed2">
+                    <i *ngIf="isCollapsed2" class="fas fa-plus"></i>
+                    <i *ngIf="!isCollapsed2" class="fas fa-minus"></i>
+                </span>
+            </div>
+        
+        </div>
+        <div *ngFor="let brand of brands" class="card-body p-0" [ngbCollapse]="isCollapsed2">
+            <ul class="nav nav-pills flex-column">
+            <li class="nav-item active" style="cursor: pointer;" (click)="getProductByBrand(brand.id)">
+                <a class="nav-link">
+                    {{brand.name}}
+                    <!-- <span class="badge bg-primary float-right" style="color: white;">12</span> -->
+                </a>
+            </li>
+            </ul>
+        </div>
+        <!-- /.card-body -->
+    </div>
+
+</div>

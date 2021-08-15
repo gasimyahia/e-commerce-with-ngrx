@@ -1,0 +1,97 @@
+<!-- <div class="wrapper">
+  <app-topbar></app-topbar>
+  <app-sidebar></app-sidebar>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+  <app-asidebar></app-asidebar>
+  <app-footer></app-footer> 
+</div> -->
+<div class="wrapper">
+
+	<div class="top_navbar fixed-top">
+		<div class="logo">
+			<a routerLink="/admin">
+        <img src="assets/logo.jpg" alt="Logo" class="brand-image img-circle elevation-3"
+             style="opacity: .8; width: 40px; height: 40px; border-radius: 50%;">
+        <span class="brand-text font-weight-light " style="color: lightgrey; cursor: pointer;padding-left: 5px;">Admin</span>
+      </a>
+		</div>
+		<div class="top_menu">
+			<div class="home_link">
+				<a routerLink="/admin">
+					<span class="icon"><i class="fas fa-home"></i></span>
+					<span>Home</span>
+				</a>
+			</div>
+			<div class="right_info">
+				<div class="icon_wrap">
+					<div class="icon">
+						<i class="fas fa-bell"></i>
+					</div>
+				</div>
+				<div class="icon_wrap">
+					<div class="icon">
+						<i class="fas fa-cog"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="main_body">
+		
+		<div class="sidebar_menu">
+	        <div class="inner__sidebar_menu">
+	        	
+	        	<ul>
+		          <li>
+		            <a routerLink="/admin/products" routerLinkActive="active">
+		              <span class="icon">
+		              	<i class="nav-icon fas fa-box-open"></i></span>
+		              <span class="list">Products</span>
+		            </a>
+		          </li>
+		          <li>
+		            <a routerLink="/admin/categories" routerLinkActive="active">
+		              <span class="icon"><i class="nav-icon fas fa-cube"></i></span>
+		              <span class="list">Category</span>
+		            </a>
+		          </li>
+		          <li>
+		            <a routerLink="/admin/brands" routerLinkActive="active">
+		              <span class="icon"><i class="nav-icon fas fa-box-open"></i></span>
+		              <span class="list">Brands</span>
+		            </a>
+		          </li>
+		          <li>
+		            <a >
+		              <span class="icon"><i class="fas fa-address-card" routerLinkActive="active"></i></span>
+		              <span class="list">User</span>
+		            </a>
+		          </li>
+		          <li>
+		            <a routerLinkActive="active">
+		              <span class="icon"><i class="fas fa-book"></i></span>
+		              <span class="list">Site</span>
+		            </a>
+		          </li>
+		        </ul>
+
+		        <!-- <div class="hamburger">
+			        <div class="inner_hamburger">
+			            <span class="arrow">
+			                <i class="fas fa-long-arrow-alt-left"></i>
+			                <i class="fas fa-long-arrow-alt-right"></i>
+			            </span>
+			        </div>
+			    </div> -->
+
+	        </div>
+	  </div>
+
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+	</div>
+</div>

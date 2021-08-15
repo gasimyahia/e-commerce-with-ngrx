@@ -1,0 +1,291 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Manage Product</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+          <li class="breadcrumb-item active">Products</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<!-- <div style="padding:2%;"> -->
+<div class="card card-primary card-outline">
+  <div class="card-header">
+    <h3 class="card-title">Inbox</h3>
+
+    <div class="card-tools">
+      <div class="input-group input-group-sm">
+        <input type="text" id="searchProdInput"
+          #inputForSearch (keyup)="search(inputForSearch.value)"
+          class="form-control" placeholder="Search Product">
+        <div class="input-group-append">
+          <div class="btn btn-primary">
+            <i class="fas fa-search"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.card-tools -->
+  </div>
+  <!-- /.card-header -->
+  <div class="card-body p-0">
+    <div class="mailbox-controls">
+        <button type="button" class="btn btn-default btn-sm" ngbTooltip="Add New Product" (click)="openAddProductModal(AddModal)">
+          <i class="fas fa-plus-circle">Add New Product</i>
+        </button>
+      <!-- Check all button -->
+      <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
+      </button>
+      <div class="btn-group">
+        <button type="button" class="btn btn-default btn-sm"><i class="far fa-trash-alt"></i></button>
+        <button type="button" class="btn btn-default btn-sm"><i class="fas fa-reply"></i></button>
+        <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i></button>
+      </div>
+      <!-- /.btn-group -->
+      <button type="button" class="btn btn-default btn-sm" (click)="refreshData()"><i class="fas fa-sync-alt"></i></button>
+      <div class="float-right">
+        1-50/200
+        <div class="btn-group">
+          <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-left"></i></button>
+          <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <!-- /.btn-group -->
+      </div>
+      <!-- /.float-right -->
+    </div>
+    <div class="table-responsive mailbox-messages">
+      <table class="table table-hover table-striped">
+        <tbody>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Brand</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th></th>
+          </tr>
+          <tr *ngFor="let pro of products">
+            <td><img src="{{pro.imgpath}}" style="width: 50px; height: 50px;" [alt]="pro.image"></td>
+            <td>{{pro.name}}</td>
+            <td>{{pro.cat_name}}</td>
+            <td>{{pro.brand_name}}</td>
+            <td>{{pro.price}}</td>
+            <td>{{pro.desc|slice:0:20}}</td>
+            <td>
+              <button type="button" class="btn btn-default btn-sm" ngbTooltip="Show Product" (click)=openShowProductModal(showModal,pro.id)><i class="fas fa-eye"></i></button>
+              <button type="button" class="btn btn-default btn-sm" ngbTooltip="Edit Product" (click)="openUpdateProductModal(updateModal,pro.id)"><i class="fas fa-edit"></i></button>
+              <button type="button" class="btn btn-default btn-sm" ngbTooltip="Delete Product" (click)="openForDeleteModal(deleteModal,pro.id)"><i class="fas fa-trash"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- /.table -->
+    </div>
+    <!-- /.mail-box-messages -->
+  </div>
+  <!-- /.card-body -->
+  <div class="card-footer p-0">
+    <div class="mailbox-controls">
+      <div class="col-md-12" style="padding-left: 33%; margin-top: 15px;">
+        <ngb-pagination 
+          [(page)]="page"
+          [pageSize]="size"
+          [collectionSize]="products.length"
+          (pageChange)="PageChange()"
+          >
+
+        </ngb-pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- </div> -->
+
+  <ng-template #AddModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Add Product</h4>
+    </div>
+    <form [formGroup]="productForm" (ngSubmit)="onAddProduct()">
+    <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-9">
+              <input id="image" type="file" style="margin-left: 10px;" accept="image/*" formControlName="image">
+            </div>
+          </div><br>
+          <div class="row">
+            <div class="col">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" formControlName="name">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="category">Category</label>
+              <select class="form-control" id="category" formControlName="category">
+                <option *ngFor="let cat of categories" [ngValue]="cat.id" >
+                  {{cat.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="brand">Brand</label>
+              <select class="form-control" id="brand" formControlName="brand">
+                <option *ngFor="let brand of brands" [ngValue]="brand.id" >
+                  {{brand.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="price">Price</label>
+              <input type="number" class="form-control" id="price" formControlName="price">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="desc">Description</label>
+              <textarea  class="form-control" id="desc" formControlName="desc"></textarea>
+            </div>
+          </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')" (click)="resetForm(productForm)">Close</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid" (click)="modal.dismiss('Cross click')">Add Product</button>
+    </div>
+    </form>
+  </ng-template>
+
+  <ng-template #updateModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Update Product</h4>
+    </div>
+    <form [formGroup]="productForm" (ngSubmit)="update()">
+    <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-9">
+              <input id="image" type="file" style="margin-left: 10px;" accept="image/*" formControlName="image">
+            </div>
+          </div><br>
+          <div class="row">
+            <div class="col">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" formControlName="name">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="category">Category</label>
+              <select class="form-control" id="category" formControlName="category">
+                <option *ngFor="let cat of categories" [ngValue]="cat.id">
+                  {{cat.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="brand">Brand</label>
+              <select class="form-control" id="brand" formControlName="brand">
+                <option *ngFor="let bra of brands" [ngValue]="bra.id">
+                  {{bra.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="price">Price</label>
+              <input type="number" class="form-control" id="price" formControlName="price">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="desc">Description</label>
+              <textarea  class="form-control" id="desc" formControlName="desc"></textarea>
+            </div>
+          </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')" (click)="resetForm(productForm)">Close</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid" (click)="modal.dismiss('Cross click')">Update Product</button>
+    </div>
+    </form>
+  </ng-template>
+
+  <ng-template #deleteModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Deleting Product</h4>
+    </div>
+    <form [formGroup]="productForm" (ngSubmit)="deleteConfrim()">
+    <div class="modal-body">
+      <div class="container-fluid">
+        <h4 style="color: red;">Are you want to delete this product ?</h4>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')" (click)="resetForm(productForm)">Concel</button>
+      <button type="submit" class="btn btn-danger" (click)="modal.dismiss('Cross click')">Delete</button>
+    </div>
+    </form>
+  </ng-template>
+
+  <ng-template #showModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Product Detials</h4>
+    </div>
+    <div class="modal-body">
+      <div class="table-responsive mailbox-messages">
+        <table class="table table-hover table-striped">
+          <tbody>
+            <tr>
+              <th>Image</th>
+              <td><img src="{{proShow.imgpath}}" style="width: 50px; height: 50px;" alt="{{proShow.image}}"></td>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <td>{{proShow.name}}</td>
+            </tr>
+            <tr>
+              <th>Category</th>
+              <td>{{proShow.cat_name}}</td>
+            </tr>
+            <tr>
+              <th>Brand</th>
+              <td>{{proShow.brand_name}}</td>
+            </tr>
+            <tr>
+              <th>Price</th>
+              <td>{{proShow.price}}</td>
+            </tr>
+            <tr>
+              <th>Description</th>
+              <td>{{proShow.desc}}</td>
+            </tr>
+            
+          </tbody>
+        </table>
+        <!-- /.table -->
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>
+
+  <app-toast aria-live="polite" aria-atomic="true"></app-toast>

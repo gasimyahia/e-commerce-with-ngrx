@@ -1,0 +1,60 @@
+<div class="modal-header">
+  <h4 class="modal-title">Update Product </h4>
+</div>
+<form [formGroup]="productForm" (ngSubmit)="update()">
+<div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-9">
+
+          <input id="uimage" type="file" style="margin-left: 10px;" accept="image/*" formControlName="image">
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col">
+          <label for="uname">Name</label>
+          <input type="text" class="form-control" id="uname" value="{{product.name}}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label for="ucategory">Category</label>
+          <select class="form-control" id="ucategory" formControlName="category">
+            <option value="Phone">Phone</option>
+            <option value="Computer">Personal Coputer</option>
+            <option value="TV">TV</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label for="ubrand">Brand</label>
+          <select class="form-control" id="ubrand" formControlName="brand">
+            <option value="iphone">iPhone</option>
+            <option value="HP">HP</option>
+            <option value="LG">LG</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label for="uprice">Price</label>
+          <input type="number" class="form-control" id="uprice" formControlName="price" value="{{product.price}}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label for="udesc">Description</label>
+          <textarea  class="form-control" id="udesc" formControlName="desc" value="{{product.desc}}">
+          </textarea>
+        </div>
+      </div>
+    </div>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-light" (click)="activeModal.close('Close click')">Close</button>
+  <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid" (click)="activeModal.dismiss('Cross click')">Add Product</button>
+</div>
+</form>
+

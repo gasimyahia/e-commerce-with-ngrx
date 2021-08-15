@@ -1,0 +1,54 @@
+
+<nav class="main-header navbar navbar-expand navbar-dark bg-dark navbar-light">
+ 
+  <ul class="navbar-nav">
+    
+    <div class="navbar-header">
+      <a routerLink="/" class="nav-link navbar-brand">Product Management</a>
+    </div>
+    <li class="nav-item d-none d-sm-inline-block">
+      <a routerLink="/admin/products" class="nav-link">Products</a>
+    </li>
+    <li class="nav-item d-none d-sm-inline-block">
+      <a routerLink="/admin/categories" class="nav-link">Category</a>
+    </li>
+    <li class="nav-item d-none d-sm-inline-block">
+      <a routerLink="/admin/brands" class="nav-link">Brand</a>
+    </li>
+  </ul>
+
+  <ul *ngIf="!isLogin" class="navbar-nav ml-auto">
+    <li class="nav-item d-none d-sm-inline-block">
+      <a routerLink="/admin/categories" class="nav-link">Login</a>
+    </li>
+    <li class="nav-item d-none d-sm-inline-block">
+      <a routerLink="/admin/brands" class="nav-link">register</a>
+    </li>
+  </ul>
+  <div *ngIf="isLogin" class="navbar-collapse" [class.collapse]="collapsed" id="navbarContent">
+    <ul class="navbar-nav ml-auto">
+      <li *ngIf="isLogin" class="nav-item d-none d-sm-inline-block" ngbDropdown>
+        <a class="nav-link media align-items-center" ngbDropdownToggle  style="padding: 0; margin: 0;">
+            <div class="client-avatar flex-container user-log" >
+              <div class="flex-centered" style="text-align: center;">AW</div>
+            </div>
+        </a>
+        <div ngbDropdownMenu aria-labelledby="navbarDropdown2" class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-header">Settings</span>
+          <div class="dropdown-divider"></div>
+          <a ngbDropdownItem (click)="$event.preventDefault()" (click)="logout()">
+            <i class="fas fa-envelope mr-2"></i> Logout
+          </a>
+          <div class="dropdown-divider"></div>
+          <a ngbDropdownItem (click)="$event.preventDefault()" class="dropdown-footer">
+            Other
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+
+
