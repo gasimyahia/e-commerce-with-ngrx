@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { categoryModel } from 'src/app/models/category.model';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-category',
@@ -18,6 +19,9 @@ export class CategoryComponent implements OnInit {
   updateForm:FormGroup;
   id=null;
   tempId=null;
+  files:any;
+  submitted=false
+  apiUrl:any;
 
   constructor(private catSer:CategoryService,
               private modalService: NgbModal,
@@ -27,10 +31,20 @@ export class CategoryComponent implements OnInit {
             ) {  }
 
   ngOnInit(): void {
+    this.apiUrl=environment.apiUrl;
     this.catSer.allCategories.subscribe(res=>{
       this.categories=res;
     });
     this.initForm();
+  }
+
+  get f(){
+    return this.catForm.controls;
+  }
+
+  uploadImage(event){
+    this.files=event.target.files[0];
+    console.log(this.files);
   }
 
   openAddCategoryModal(AddModal) {
@@ -51,7 +65,7 @@ export class CategoryComponent implements OnInit {
       });
       this.modalService.open(updateModal);
   }
-  
+
   openForDeleteModal(deleteModal,id){
     this.modalService.open(deleteModal);
     this.tempId=id;
@@ -74,21 +88,28 @@ export class CategoryComponent implements OnInit {
   private initForm(){
     this.catForm=this.formBulider.group({
       name:['',[Validators.required]],
-      desc:['',[Validators.required]]
+      desc:['',[Validators.required]],
+      image:[null]
     });
   }
 
 
   onAddCategory(){
-    let cate=new categoryModel();
-    console.log(this.catForm.value);
-    cate.name=this.catForm.value.name;
-    cate.desc=this.catForm.value.desc;
-    this.catSer.add(cate).subscribe(
+    this.submitted=true;
+    if(this.catForm.invalid){
+      return;
+    }
+    const formData=new FormData();
+    formData.append("image",this.files,this.files.name);
+    formData.append("name",this.catForm.value.name);
+    formData.append("desc",this.catForm.value.desc);
+    this.catSer.add(formData).subscribe(
       res=>{
         this.toastSuccess(res['message']);
+        this.modalService.dismissAll();
         this.catSer.getFromDb("");
         this.resetForm(this.catForm);
+        this.submitted=false;
       },
       error=>{error.error.error.forEach(element=>{this.toastDanger(element);});}
     );
@@ -96,15 +117,26 @@ export class CategoryComponent implements OnInit {
 
 
   update(){
-    let prod=new categoryModel();
-    prod.id=this.tempId;
-    prod.name=this.catForm.value.name;
-    prod.desc=this.catForm.value.desc;
-    this.catSer.update(prod).subscribe(
+    this.submitted=true;
+    if(this.catForm.invalid){
+      return;
+    }
+    const formData=new FormData();
+    formData.append("id",this.tempId);
+    if(this.catForm.value.image != null)
+    {
+      formData.append("image",this.files,this.files.name);
+    }
+    formData.append("name",this.catForm.value.name);
+    formData.append("desc",this.catForm.value.desc);
+    console.log("form data"+formData);
+    this.catSer.update(formData).subscribe(
       res=>{
         this.toastSuccess(res['message']);
+        this.modalService.dismissAll();
         this.catSer.getFromDb("");
         this.resetForm(this.catForm);
+        this.submitted=false;
       },
       error=>{error.error.error.forEach(element=>{this.toastDanger(element);});}
     );

@@ -71,7 +71,7 @@
             <th></th>
           </tr>
           <tr *ngFor="let pro of products">
-            <td><img src="{{pro.imgpath}}" style="width: 50px; height: 50px;" [alt]="pro.image"></td>
+            <td><img src="{{apiUrl}}/{{pro.imgpath}}" style="width: 50px; height: 50px;" [alt]="pro.image"></td>
             <td>{{pro.name}}</td>
             <td>{{pro.cat_name}}</td>
             <td>{{pro.brand_name}}</td>
@@ -93,10 +93,10 @@
   <div class="card-footer p-0">
     <div class="mailbox-controls">
       <div class="col-md-12" style="padding-left: 33%; margin-top: 15px;">
-        <ngb-pagination 
+        <ngb-pagination
           [(page)]="page"
           [pageSize]="size"
-          [collectionSize]="products.length"
+          [collectionSize]="collectionSize"
           (pageChange)="PageChange()"
           >
 
@@ -117,53 +117,76 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-9">
-              <input id="image" type="file" style="margin-left: 10px;" accept="image/*" formControlName="image">
+              <input id="image" type="file" style="margin-left: 10px;" accept="image/*" formControlName="image"
+              (change)="uploadImage($event)" [ngClass]="{'is-invalid' : submitted && f.image.errors}">
+              <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
+                <div *ngIf="f.image.errors.required">Image is Required</div>
+              </div>
             </div>
           </div><br>
           <div class="row">
             <div class="col">
               <label for="name">Name</label>
-              <input type="text" class="form-control" id="name" formControlName="name">
+              <input type="text" class="form-control" id="name" formControlName="name"
+                [ngClass]="{'is-invalid' : submitted && f.name.errors}">
+              <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">Name is Required</div>
+              </div>
             </div>
           </div>
           <div class="row">
             <div class="col">
               <label for="category">Category</label>
-              <select class="form-control" id="category" formControlName="category">
+              <select class="form-control" id="category" formControlName="category"
+              [ngClass]="{'is-invalid' : submitted && f.category.errors}">
                 <option *ngFor="let cat of categories" [ngValue]="cat.id" >
                   {{cat.name}}
                 </option>
               </select>
+              <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
+                <div *ngIf="f.category.errors.required">Category is Required</div>
+              </div>
             </div>
           </div>
           <div class="row">
             <div class="col">
               <label for="brand">Brand</label>
-              <select class="form-control" id="brand" formControlName="brand">
+              <select class="form-control" id="brand" formControlName="brand"
+              [ngClass]="{'is-invalid' : submitted && f.brand.errors}">
                 <option *ngFor="let brand of brands" [ngValue]="brand.id" >
                   {{brand.name}}
                 </option>
               </select>
+              <div *ngIf="submitted && f.brand.errors" class="invalid-feedback">
+                <div *ngIf="f.brand.errors.required">Brand is Required</div>
+              </div>
             </div>
           </div>
           <div class="row">
             <div class="col">
               <label for="price">Price</label>
-              <input type="number" class="form-control" id="price" formControlName="price">
+              <input type="number" class="form-control" id="price" formControlName="price"
+              [ngClass]="{'is-invalid' : submitted && f.price.errors}">
+              <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+                <div *ngIf="f.price.errors.required">Price is Required</div>
+              </div>
             </div>
           </div>
           <div class="row">
             <div class="col">
               <label for="desc">Description</label>
-              <textarea  class="form-control" id="desc" formControlName="desc"></textarea>
+              <textarea  class="form-control" id="desc" formControlName="desc"
+              [ngClass]="{'is-invalid' : submitted && f.desc.errors}"></textarea>
+              <div *ngIf="submitted && f.desc.errors" class="invalid-feedback">
+                <div *ngIf="f.desc.errors.required">Description is Required</div>
+              </div>
             </div>
           </div>
         </div>
-
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-light" (click)="modal.close('Close click')" (click)="resetForm(productForm)">Close</button>
-      <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid" (click)="modal.dismiss('Cross click')">Add Product</button>
+      <button type="submit" class="btn btn-primary">Add Product</button>
     </div>
     </form>
   </ng-template>
@@ -174,52 +197,75 @@
     </div>
     <form [formGroup]="productForm" (ngSubmit)="update()">
     <div class="modal-body">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-9">
-              <input id="image" type="file" style="margin-left: 10px;" accept="image/*" formControlName="image">
-            </div>
-          </div><br>
-          <div class="row">
-            <div class="col">
-              <label for="name">Name</label>
-              <input type="text" class="form-control" id="name" formControlName="name">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-9">
+            <input id="image" type="file" style="margin-left: 10px;" accept="image/*" formControlName="image"
+            (change)="uploadImage($event)" [ngClass]="{'is-invalid' : submitted && f.image.errors}">
+            <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
+              <div *ngIf="f.image.errors.required">Image is Required</div>
             </div>
           </div>
-          <div class="row">
-            <div class="col">
-              <label for="category">Category</label>
-              <select class="form-control" id="category" formControlName="category">
-                <option *ngFor="let cat of categories" [ngValue]="cat.id">
-                  {{cat.name}}
-                </option>
-              </select>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <label for="brand">Brand</label>
-              <select class="form-control" id="brand" formControlName="brand">
-                <option *ngFor="let bra of brands" [ngValue]="bra.id">
-                  {{bra.name}}
-                </option>
-              </select>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <label for="price">Price</label>
-              <input type="number" class="form-control" id="price" formControlName="price">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <label for="desc">Description</label>
-              <textarea  class="form-control" id="desc" formControlName="desc"></textarea>
+        </div><br>
+        <div class="row">
+          <div class="col">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" formControlName="name"
+              [ngClass]="{'is-invalid' : submitted && f.name.errors}">
+            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+              <div *ngIf="f.name.errors.required">Name is Required</div>
             </div>
           </div>
         </div>
-
+        <div class="row">
+          <div class="col">
+            <label for="category">Category</label>
+            <select class="form-control" id="category" formControlName="category"
+            [ngClass]="{'is-invalid' : submitted && f.category.errors}">
+              <option *ngFor="let cat of categories" [ngValue]="cat.id" >
+                {{cat.name}}
+              </option>
+            </select>
+            <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
+              <div *ngIf="f.category.errors.required">Category is Required</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="brand">Brand</label>
+            <select class="form-control" id="brand" formControlName="brand"
+            [ngClass]="{'is-invalid' : submitted && f.brand.errors}">
+              <option *ngFor="let brand of brands" [ngValue]="brand.id" >
+                {{brand.name}}
+              </option>
+            </select>
+            <div *ngIf="submitted && f.brand.errors" class="invalid-feedback">
+              <div *ngIf="f.brand.errors.required">Brand is Required</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="price">Price</label>
+            <input type="number" class="form-control" id="price" formControlName="price"
+            [ngClass]="{'is-invalid' : submitted && f.price.errors}">
+            <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+              <div *ngIf="f.price.errors.required">Price is Required</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="desc">Description</label>
+            <textarea  class="form-control" id="desc" formControlName="desc"
+            [ngClass]="{'is-invalid' : submitted && f.desc.errors}"></textarea>
+            <div *ngIf="submitted && f.desc.errors" class="invalid-feedback">
+              <div *ngIf="f.desc.errors.required">Description is Required</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-light" (click)="modal.close('Close click')" (click)="resetForm(productForm)">Close</button>
@@ -255,7 +301,7 @@
           <tbody>
             <tr>
               <th>Image</th>
-              <td><img src="{{proShow.imgpath}}" style="width: 50px; height: 50px;" alt="{{proShow.image}}"></td>
+              <td><img src="{{apiUrl}}/{{proShow.imgpath}}" style="width: 50px; height: 50px;" alt="{{proShow.image}}"></td>
             </tr>
             <tr>
               <th>Name</th>
@@ -277,7 +323,7 @@
               <th>Description</th>
               <td>{{proShow.desc}}</td>
             </tr>
-            
+
           </tbody>
         </table>
         <!-- /.table -->

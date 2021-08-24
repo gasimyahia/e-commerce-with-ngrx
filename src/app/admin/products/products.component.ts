@@ -8,6 +8,7 @@ import { BrandService } from '../../services/brand/brand.service';
 import { categoryModel } from '../../models/category.model';
 import { brandModel } from '../../models/brand.model';
 import { product } from '../../models/product';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -29,7 +30,11 @@ export class ProductsComponent implements OnInit {
   tempId=null;
   page:number=1;
   size:number=1;
+  collectionSize:number=0;
   numElement:number=4;
+  files:any;
+  submitted=false
+  apiUrl:any;
 
   constructor(private proSer:ProductService,
               private modalService: NgbModal,
@@ -40,9 +45,13 @@ export class ProductsComponent implements OnInit {
             ) {  }
 
   ngOnInit(): void {
+    this.apiUrl=environment.apiUrl;
     this.proSer.allProducts.subscribe(res=>{
       this.products=res;
     });
+    if(this.products !=null){
+      this.collectionSize=this.products.length;
+    }
     this.initForm();
     this.categoryService.getCategories().subscribe((data:any)=>{
       this.categories=data.categories;
@@ -52,6 +61,16 @@ export class ProductsComponent implements OnInit {
     });
 
   }
+
+  get f(){
+    return this.productForm.controls;
+  }
+
+  uploadImage(event){
+    this.files=event.target.files[0];
+    console.log(this.files);
+  }
+
 
   openAddProductModal(AddModal) {
       this.modalService.open(AddModal, { scrollable: true });
@@ -75,7 +94,7 @@ export class ProductsComponent implements OnInit {
       });
       this.modalService.open(updateModal);
   }
-  
+
   openForDeleteModal(deleteModal,id){
     this.modalService.open(deleteModal);
     this.tempId=id;
@@ -102,26 +121,30 @@ export class ProductsComponent implements OnInit {
       brand:[null,[Validators.required]],
       price:[null,[Validators.required]],
       desc:['',[Validators.required]],
-      image:[''],
+      image:[null],
     });
   }
 
 
   onAddProduct(){
-    let prod=new product();
-    console.log(this.productForm.value);
-    prod.name=this.productForm.value.name;
-    prod.category=this.productForm.value.category;
-    prod.brand=this.productForm.value.brand;
-    prod.price=this.productForm.value.price;
-    prod.desc=this.productForm.value.desc;
-    prod.image=this.productForm.value.image;
-    console.log(prod);
-    this.proSer.add(prod).subscribe(
+    this.submitted=true;
+    if(this.productForm.invalid){
+      return;
+    }
+    const formData=new FormData();
+    formData.append("image",this.files,this.files.name);
+    formData.append("name",this.productForm.value.name);
+    formData.append("category",this.productForm.value.category);
+    formData.append("brand",this.productForm.value.brand);
+    formData.append("desc",this.productForm.value.desc);
+    formData.append("price",this.productForm.value.price);
+    this.proSer.add(formData).subscribe(
       res=>{
         this.toastSuccess(res['message']);
+        this.modalService.dismissAll();
         this.proSer.getFromDb("");
         this.resetForm(this.productForm);
+        this.submitted=false;
       },
       error=>{error.error.error.forEach(element=>{this.toastDanger(element);});}
     );
@@ -129,20 +152,28 @@ export class ProductsComponent implements OnInit {
 
 
   update(){
-    let prod=new product();
-    prod.id=this.tempId;
-    prod.name=this.productForm.value.name;
-    prod.category=this.productForm.value.category;
-    prod.brand=this.productForm.value.brand;
-    prod.price=this.productForm.value.price;
-    prod.desc=this.productForm.value.desc;
-    prod.image=this.productForm.value.image;
-    console.log(prod);
-    this.proSer.update(prod).subscribe(
+    this.submitted=true;
+    if(this.productForm.invalid){
+      return;
+    }
+    const formData=new FormData();
+    formData.append("id",this.tempId);
+    if(this.productForm.value.image != null)
+    {
+      formData.append("image",this.files,this.files.name);
+    }
+    formData.append("name",this.productForm.value.name);
+    formData.append("category",this.productForm.value.category);
+    formData.append("brand",this.productForm.value.brand);
+    formData.append("desc",this.productForm.value.desc);
+    formData.append("price",this.productForm.value.price);
+    this.proSer.update(formData).subscribe(
       res=>{
         this.toastSuccess(res['message']);
+        this.modalService.dismissAll();
         this.proSer.getFromDb("");
         this.resetForm(this.productForm);
+        this.submitted=false;
       },
       error=>{error.error.error.forEach(element=>{this.toastDanger(element);});}
     );
@@ -176,4 +207,14 @@ export class ProductsComponent implements OnInit {
 
   PageChange(){}
 
+}
+
+
+export function toFormData<T>( formValue: T ) {
+  const formData = new FormData();
+  for ( const key of Object.keys(formValue) ) {
+    const value = formValue[key];
+    formData.append(key, value);
+  }
+  return formData;
 }

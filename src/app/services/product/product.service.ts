@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { productModel } from '../../models/product.model';
+import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
 import { productsModel } from 'src/app/models/products.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
   Products=new BehaviorSubject<productsModel[]>(null);;
-  private baseURL="http://localhost:8000/api/";
+  private baseURL=environment.apiUrl+"/api/";
   allProducts=new BehaviorSubject<productsModel[]>(null);
 
   constructor(private http:HttpClient) { this.getFromDb(""); }
@@ -58,11 +58,12 @@ export class ProductService {
     })
   }
 
- // fetch the product by category
-  // getProductBy(categoryId?: number){
-  //   let filterdProduct = this.allProducts.value.filter(product => product.cat_id == categoryId)
-  //   this.allProducts.next(filterdProduct);
-  // }
+ uploadImage(data){
+   const headers=new HttpHeaders();
+   return this.http.post(this.baseURL+"file",data,{
+     headers:headers
+   });
+ }
 
-  
+
 }

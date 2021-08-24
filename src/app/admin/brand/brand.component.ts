@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { brandModel } from 'src/app/models/brand.model';
 import { BrandService } from 'src/app/services/brand/brand.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-brand',
@@ -15,9 +16,11 @@ export class BrandComponent implements OnInit {
   bra:any=null;
   braShow:any=null;
   brandForm:FormGroup;
-  updateForm:FormGroup;
   id=null;
   tempId=null;
+  files:any;
+  submitted=false
+  apiUrl:any;
 
   constructor(private brandSer:BrandService,
               private modalService: NgbModal,
@@ -26,10 +29,20 @@ export class BrandComponent implements OnInit {
             ) {  }
 
   ngOnInit(): void {
+    this.apiUrl=environment.apiUrl;
     this.brandSer.allBrands.subscribe(res=>{
       this.brands=res;
     });
     this.initForm();
+  }
+
+  get f(){
+    return this.brandForm.controls;
+  }
+
+  uploadImage(event){
+    this.files=event.target.files[0];
+    console.log(this.files);
   }
 
   openAddBrandModal(AddModal) {
@@ -50,7 +63,7 @@ export class BrandComponent implements OnInit {
       });
       this.modalService.open(updateModal);
   }
-  
+
   openForDeleteModal(deleteModal,id){
     this.modalService.open(deleteModal);
     this.tempId=id;
@@ -73,20 +86,28 @@ export class BrandComponent implements OnInit {
   private initForm(){
     this.brandForm=this.formBulider.group({
       name:['',[Validators.required]],
-      desc:['',[Validators.required]]
+      desc:['',[Validators.required]],
+      image:[null]
     });
   }
 
 
   onAddBrand(){
-    let bran=new brandModel();
-    bran.name=this.brandForm.value.name;
-    bran.desc=this.brandForm.value.desc;
-    this.brandSer.add(bran).subscribe(
+    this.submitted=true;
+    if(this.brandForm.invalid){
+      return;
+    }
+    const formData=new FormData();
+    formData.append("image",this.files,this.files.name);
+    formData.append("name",this.brandForm.value.name);
+    formData.append("desc",this.brandForm.value.desc);
+    this.brandSer.add(formData).subscribe(
       res=>{
         this.toastSuccess(res['message']);
+        this.modalService.dismissAll();
         this.brandSer.getFromDb("");
         this.resetForm(this.brandForm);
+        this.submitted=false;
       },
       error=>{error.error.error.forEach(element=>{this.toastDanger(element);});}
     );
@@ -94,15 +115,26 @@ export class BrandComponent implements OnInit {
 
 
   update(){
-    let prod=new brandModel();
-    prod.id=this.tempId;
-    prod.name=this.brandForm.value.name;
-    prod.desc=this.brandForm.value.desc;
-    this.brandSer.update(prod).subscribe(
+    this.submitted=true;
+    if(this.brandForm.invalid){
+      return;
+    }
+    const formData=new FormData();
+    formData.append("id",this.tempId);
+    if(this.brandForm.value.image != null)
+    {
+      formData.append("image",this.files,this.files.name);
+    }
+    formData.append("name",this.brandForm.value.name);
+    formData.append("desc",this.brandForm.value.desc);
+    console.log("form data"+formData);
+    this.brandSer.update(formData).subscribe(
       res=>{
         this.toastSuccess(res['message']);
+        this.modalService.dismissAll();
         this.brandSer.getFromDb("");
         this.resetForm(this.brandForm);
+        this.submitted=false;
       },
       error=>{error.error.error.forEach(element=>{this.toastDanger(element);});}
     );
@@ -121,6 +153,7 @@ export class BrandComponent implements OnInit {
 	}
 
   deleteConfrim(){
+    console.log(this.tempId);
     this.brandSer.delete(this.tempId).subscribe(
       res=>{
         this.toastSuccess(res['message']);
