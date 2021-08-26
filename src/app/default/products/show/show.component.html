@@ -1,53 +1,105 @@
-<div class="card card-solid">
-    <div class="card-body pb-0">
-      <div class="row d-flex align-items-stretch">
-        <div class="col-12 col-sm-12 col-md-12">
+        <!---------------single product details--------------->
+        <div class="small-container  singel-product">
           <div class="row">
-            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch" *ngFor="let pro of products">
-              <div class="card bg-light">
-                <div class="card-header text-muted border-bottom-0">
-                  Digital Strategist
-                </div>
-                <div class="card-body pt-0">
-                  <div class="row">
-                    <div class="col-7">
-                      <h2 class="lead"><b>{{pro.name}}</b></h2>
-                      <p class="text-muted text-sm"><b>Price : </b> {{pro.price}} </p>
-                      <ul class="ml-4 mb-0 fa-ul text-muted">
-                        <li class="small"><span class="fa-li"></span>{{pro.brand_name}}</li>
-                        <li class="small"><span class="fa-li"></span>{{pro.cat_name}}</li>
-                      </ul> 
-                      <p class="text-muted text-sm"><b>Desc </b> {{pro.desc|slice:0:20}} </p>
-                    </div>
-                    <div class="col-5 text-center">
-                      <img src="{{pro.imgpath}}" alt="Product Image" class="img-circle img-fluid">
-                    </div>
+              <div class="coll-2">
+                  <img src="./images/cat4.jfif" width="100%" height="350px" id="productImg">
+                  <div class="small-img-row">
+                      <div class="small-img-col">
+                          <img src="./images/cat5.jfif" class="small-img">
+                      </div>
+                      <div class="small-img-col">
+                          <img src="./images/cat4.jfif" class="small-img">
+                      </div>
+                      <div class="small-img-col">
+                          <img src="./images/cat5.jfif" class="small-img">
+                      </div>
+                      <div class="small-img-col">
+                          <img src="./images/cat4.jfif" class="small-img">
+                      </div>
                   </div>
-                </div>
-                <div class="card-footer">
-                  <div class="text-right">
-                    <!-- <a class="btn btn-sm bg-teal">
-                      <i class="fas fa-cart-plus"></i>
-                    </a> -->
-                    <a class="btn btn-sm btn-primary"  style="color: white;">
-                      <i class="fas fa-cart-plus"></i> Add to Cart
-                    </a>
-                  </div>
-                </div>
               </div>
-            </div>
+              <div class="coll-2">
+                  <p>Home / Samsoug Y9 Pro</p>
+                  <h1>Product name Samsoug Y9 Pro</h1>
+                  <h4>$60.000</h4>
+                  <select>
+                      <option >Select size</option>
+                      <option >XXL</option>
+                      <option >XL</option>
+                      <option >Large</option>
+                      <option >Medium</option>
+                      <option >Small</option>
+                  </select>
+                  <input type="number" value="1">
+                  <a href="#" class="bbtn">Add to Card</a>
+                  <h3>
+                      Product Details <i class="fa fa-indent"></i>
+                  </h3>
+                  <br>
+                  <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.
+                      Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.
+                  </p>
+              </div>
           </div>
-        </div>
-
       </div>
-    </div>
-    <!-- /.card-body -->
-    <div class="card-footer">
-      <nav aria-label="Contacts Page Navigation">
-        <ul class="pagination justify-content-center m-0">
-         
-        </ul>
-      </nav>
-    </div>
-    <!-- /.card-footer -->
-  </div>
+      <!-------------view more------------>
+      <div class="small-container">
+          <div class="row row-2">
+              <h2>Related Product</h2>
+              <p>View More</p>
+          </div>
+      </div>
+
+      <!--------------products------------->
+      <div class="small-container">
+          <div class="row">
+              <div class="coll-4">
+                  <img src="./images/cat1.jfif">
+                  <h4>Product name</h4>
+                  <div class="rating">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-half-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                  </div>
+                  <p>$30.00</p>
+              </div>
+              <div class="coll-4">
+                  <img src="./images/cat2.jfif">
+                  <h4>Product name</h4>
+                  <div class="rating">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-half-o"></i>
+                      <i class="fa fa-star-o"></i>
+                  </div>
+                  <p>$30.00</p>
+              </div>
+              <div class="coll-4">
+                  <img src="./images/book1.png">
+                  <h4>Product name</h4>
+                  <div class="rating">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-o"></i>
+                  </div>
+                  <p>$30.00</p>
+              </div>
+              <div class="coll-4">
+                  <img src="./images/cat3.jfif">
+                  <h4>Product name</h4>
+                  <div class="rating">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-half-o"></i>
+                  </div>
+                  <p>$30.00</p>
+              </div>
+          </div>
+      </div>

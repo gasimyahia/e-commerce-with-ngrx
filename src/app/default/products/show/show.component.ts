@@ -20,27 +20,4 @@ export class ShowComponent implements OnInit {
     //this.getProduct();
   }
 
-  // getProduct(){
-  //   this.proSer.allProducts.subscribe(res=>{
-  //     this.allProducts=res;
-  //     //console.log(this.allProducts);
-  //   });
-  //   this.route.params.subscribe(
-  //     (params:Params)=>{
-  //       this.id=+params['id'];
-  //     }
-  //   );
-  //     // this.proSer.getProduct(this.id).subscribe((res:any)=>{
-  //     //   //this.products=res.products;
-        
-  //     //   console.log(this.products);
-  //     // });
-      
-  // }
-
-  filterProducts (id,totalProduct){
-    this.products=totalProduct.filter(p => p.cat_id == id);
-    console.log(this.products);
-  }
-
 }

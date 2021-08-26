@@ -1,24 +1,26 @@
-<div class="wrapper" style="max-width: 100%;">
-    <!-- topbar -->
-    <app-topbar></app-topbar>
+<app-topbar></app-topbar>
+<router-outlet></router-outlet>
+<app-app-footer></app-app-footer>
 
-        <div class="row" style="margin-top: 5%;">
-            <!-- left sidebar -->
-            <div class="col-md-2">
-                <app-leftsidebar></app-leftsidebar>
-            </div>
-            <!-- main content -->
-            <div class="col-md-7">
-                <router-outlet></router-outlet>
-            </div>
-            <!-- right side bar for registration -->
-            <div class="col-md-3">
-                <app-registration></app-registration>
-            </div>
+<!-- <div class="wrapper" style="max-width: 100%;margin: 0;">
+
+  <app-topbar></app-topbar>
+
+    <div class="row" style="margin-top: 5%;margin: 0;">
+        <div class="col-md-2">
+            <app-leftsidebar></app-leftsidebar>
         </div>
 
-</div>
+        <div class="col-md-7">
+            <router-outlet></router-outlet>
+        </div>
+        <div class="col-md-3">
+            <app-registration></app-registration>
+        </div>
+    </div>
 
+</div> -->
+<!--
 <ng-template #LoginModal let-modal>
     <div class="modal-header">
     <h4 class="modal-title">Login</h4>
@@ -26,7 +28,7 @@
     <div class="modal-body">
        <app-login></app-login>
     </div>
-</ng-template>
+</ng-template> -->
 
 <!-- <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -40,4 +42,3 @@
       </div>
     </div>
 </div> -->
-              

@@ -1,21 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { brandModel } from 'src/app/models/brand.model';
 import { categoryModel } from 'src/app/models/category.model';
+import { productsModel } from 'src/app/models/products.model';
 import { BrandService } from 'src/app/services/brand/brand.service';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { ProductService } from 'src/app/services/product/product.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-leftsidebar',
-  templateUrl: './leftsidebar.component.html',
-  styleUrls: ['./leftsidebar.component.css']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class LeftsidebarComponent implements OnInit {
-  public isCollapsed1 = true;
-  public isCollapsed2 = true;
+export class HomeComponent implements OnInit {
   categories:categoryModel[]=[];
   brands:brandModel[]=[];
-
+  allProducts: productsModel[];
+  apiUrl:any;
 
 
   constructor(
@@ -36,19 +37,10 @@ export class LeftsidebarComponent implements OnInit {
     this.brandService.getBrands().subscribe((data:any)=>{
       this.brands=data.brands;
     });
-  }
-
-  getProductByCat(id)
-  {
-    this.proSer.getProductByCatId(id);
-  }
-
-  getProductByBrand(id){
-    this.proSer.getProductByBrandId(id);
-  }
-
-  getAllProduct(){
-    this.proSer.getAllProduct();
+    this.proSer.allProducts.subscribe(res=>{
+      this.allProducts=res;
+     });
+    this.apiUrl=environment.apiUrl;
   }
 
 }

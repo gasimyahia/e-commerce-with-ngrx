@@ -1,0 +1,195 @@
+
+<!-- <ngb-carousel *ngIf="images">
+    <ng-template ngbSlide *ngFor="let cat of categories">
+      <div class="picsum-img-wrapper">
+        <img src="{{apiUrl}}/{{cat.imgpath}}" alt="Random first slide">
+      </div>
+      <div class="carousel-caption">
+        <h3>First slide label</h3>
+        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+      </div>
+    </ng-template>
+  </ngb-carousel> -->
+
+  <!-- ---------slide------------>
+  <div class="categories">
+    <div class="slide">
+      <ngb-carousel>
+        <ng-template ngbSlide *ngFor="let cat of categories">
+          <div class="picsum-img-wrapper">
+            <img src="{{apiUrl}}/{{cat.imgpath}}" alt="Random first slide">
+          </div>
+          <div class="carousel-caption">
+            <h3>First slide label</h3>
+            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          </div>
+        </ng-template>
+      </ngb-carousel>
+    </div>
+  </div>
+
+<!-- ------ category ------- -->
+<!-- <div class="categories">
+  <div class="small-container">
+      <div class="row">
+          <div class="coll-3" *ngFor="let cat of categories">
+            <img src="{{apiUrl}}/{{cat.imgpath}}">
+          </div>
+      </div>
+  </div>
+</div> -->
+
+
+
+<!-- -------- Products --------- -->
+<div class="small-container">
+    <h1 class="title">Feature Products</h1>
+    <div class="row">
+        <div class="coll-4" *ngFor="let product of allProducts">
+            <a href="product.details.html"><img src="{{apiUrl}}/{{product.imgpath}}"></a>
+            <a href="product.details.html"><h4>{{product.name}}</h4></a>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <p>${{product.price}}</p>
+        </div>
+    </div>
+    <h1 class="title">Latest Products</h1>
+    <div class="row">
+      <div class="coll-4">
+        <a href="product.details.html"><img src="{{apiUrl}}/{{allProducts[allProducts.length-1].imgpath}}"></a>
+        <a href="product.details.html"><h4>{{allProducts[allProducts.length-1].name}}</h4></a>
+        <div class="rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-o"></i>
+        </div>
+        <p>${{allProducts[allProducts.length-1].price}}</p>
+      </div>
+      <div class="coll-4">
+        <a href="product.details.html"><img src="{{apiUrl}}/{{allProducts[allProducts.length-2].imgpath}}"></a>
+        <a href="product.details.html"><h4>{{allProducts[allProducts.length-2].name}}</h4></a>
+        <div class="rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-o"></i>
+        </div>
+        <p>${{allProducts[allProducts.length-2].price}}</p>
+      </div>
+      <div class="coll-4">
+        <a href="product.details.html"><img src="{{apiUrl}}/{{allProducts[allProducts.length-3].imgpath}}"></a>
+        <a href="product.details.html"><h4>{{allProducts[allProducts.length-3].name}}</h4></a>
+        <div class="rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-o"></i>
+        </div>
+        <p>${{allProducts[allProducts.length-3].price}}</p>
+      </div>
+    </div>
+</div>
+
+<!-- ---------- offer ---------- -->
+<div class="offer">
+    <div class="small-container">
+        <div class="row">
+            <div class="coll-2">
+                <a href="product.details.html"><img class="offer-img" src="{{apiUrl}}/{{allProducts[allProducts.length-1].imgpath}}" width="150px" height="400px"></a>
+            </div>
+            <div class="coll-2">
+                <p>{{allProducts[allProducts.length-1].cat_name}}</p>
+                <h1>{{allProducts[allProducts.length-1].name}}</h1>
+                <small>
+                  {{allProducts[allProducts.length-1].desc}}
+                </small>
+                <br>
+                <a href="#" class="bbtn">Buy New &#8594;</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- -----------testimonials------------- -->
+<div class="testimonial">
+    <div class="small-container">
+        <div class="row">
+            <div class="coll-3">
+                <i class="fa fa-quote-left"></i>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                    ut aliquip ex ea commodo consequat.
+                </p>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                </div>
+                <img src="assets/avatar2.png">
+                <h3>user name</h3>
+            </div>
+            <div class="coll-3">
+                <i class="fa fa-quote-left"></i>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                    ut aliquip ex ea commodo consequat.
+                </p>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                </div>
+                <img src="assets/avatar5.png">
+                <h3>user name</h3>
+            </div>
+            <div class="coll-3">
+                <i class="fa fa-quote-left"></i>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                    ut aliquip ex ea commodo consequat.
+                </p>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                </div>
+                <img src="assets/avatar7.png">
+                <h3>user name</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- -----------brands-------------->
+<div class="brands">
+    <div class="small-container">
+        <div class="row">
+            <div class="coll-5" *ngFor="let brand of brands">
+                <img src="{{apiUrl}}/{{brand.imgpath}}">
+            </div>
+        </div>
+    </div>
+</div>

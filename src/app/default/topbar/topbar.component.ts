@@ -30,6 +30,9 @@ export class TopbarComponent implements OnInit {
     this.initForm();
     this.isLogin=this.userService.isLogin;
   }
+
+
+
   openLoginModal(LoginModal) {
     this.modalService.open(LoginModal, { scrollable: true });
   }
@@ -60,7 +63,7 @@ export class TopbarComponent implements OnInit {
           this.isSubmitted=true;
           this.errorMessage=res['error'];
         }
-        
+
       },
       error=>{
         error.error.error.forEach(element=>{this.toastDanger(element);});
@@ -87,5 +90,19 @@ export class TopbarComponent implements OnInit {
     localStorage.removeItem("pm_user");
     this.isLogin=false;
   }
+
+
+  //--------------script for toggle menu--------------
+
+  menuToggle(){
+    var menuItems=document.getElementById("menuItems");
+    if(menuItems.style.maxHeight=="0px")
+    {
+        menuItems.style.maxHeight="200px";
+    }else{
+        menuItems.style.maxHeight="0px";
+    }
+}
+
 
 }

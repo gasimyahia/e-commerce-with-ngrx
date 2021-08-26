@@ -1,1 +1,361 @@
-/* You can add global styles to this file, and also import other style files */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+a{
+  text-decoration: none;
+  /* color: #555; */
+  color: #ff523b;
+  font-weight: 600;
+}
+p{
+  color: #555;
+}
+
+.container{
+  max-width: 1300px;
+  margin: auto;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+
+
+.row{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.coll-2{
+  flex-basis: 50%;
+  min-width: 300px;
+}
+
+.coll-2 img{
+  width: 100%;
+  max-width: 100%;
+  padding-top: 50px;
+
+}
+
+.coll-2 h1{
+  font-size: 50px;
+  margin: 25px 0;
+  line-height: 60px;
+}
+
+.bbtn{
+  display: inline-block;
+  background: #ff523b;
+  color: #fff;
+  padding: 8px 30px;
+  margin: 30px 0;
+  border-radius: 30px;
+  transition: background 0.5s;
+}
+.bbtn:hover{
+  background: #563434;
+}
+.cart{
+  margin-left: 25px;
+}
+
+.coll-3{
+  flex-basis: 30%;
+  min-width: 250px;
+  margin-top: 30px;
+}
+
+
+.small-container{
+  max-width: 1080px;
+  margin:auto;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.coll-4{
+  flex-basis: 24%;
+  padding:20px 20px;
+  min-width: 200px;
+  margin-bottom: 50px;
+  transition: transform 0.5s;
+}
+.coll-4 img{
+  width: 100%;
+  height: 180px;
+}
+
+/* -----------category----------- */
+.slide{
+  width: 100%;
+  margin-top: 80px;
+  background: #fff;
+}
+.slide p,h3{
+  color: 		#008080;
+  margin-bottom: 20px;
+}
+.slide .picsum-img-wrapper img{
+  width: 100%;
+  height: 500px;
+}
+
+.categories{
+  margin: 100px 0px;
+}
+
+ .coll-3 img{
+  width: 100%;
+  height: 200px;
+}
+
+
+/* --------products-------- */
+.title{
+  text-align: center;
+  margin: 0 auto 80px;
+  position: relative;
+  line-height: 60px;
+  color: #555;
+}
+.title::after{
+  content: '';
+  background: #ff523b;
+  width: 80px;
+  height: 5px;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+h4{
+  color: #555;
+  font-weight: normal;
+}
+.coll-4 img{
+  width: 100%;
+  height: 220px;
+}
+.coll-4 p{
+  font-size: 14px;
+}
+
+.rating .fa{
+  color: #ff523b;
+}
+
+.coll-4:hover{
+  transform: translateX(-5px) ;
+}
+
+/* -------------offer-------------- */
+
+.offer{
+  background: radial-gradient(#fff,#ffd6d6);
+  margin-top: 80px;
+  padding: 30px 0;
+}
+
+.coll-2 .offer-img{
+  padding: 50px;
+}
+
+small{
+  color: #555;
+}
+
+
+/* -----------testimonials----------------- */
+.testimonial{
+  padding-top: 100px;
+}
+.testimonial .coll-3{
+  text-align: center;
+  padding:40px 2px;
+  box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.5s;
+}
+.testimonial .coll-3 img{
+  width: 50px;
+  height: 50px;
+  margin-top: 20px;
+  border-radius: 50%;
+}
+
+.testimonial .coll-3:hover{
+  transform: translateY(-10px);
+}
+
+.fa-quote-left{
+  font-size: 34px;
+  color: #ff523b;
+}
+
+.testimonial .coll-3 p{
+  font-size: 12px;
+  margin: 12px 0;
+  color: #777;
+}
+
+.testimonial .coll-3 h3{
+  font-weight: 600;
+  color: #555;
+  font-size: 16px;
+}
+
+/* ------------brands------------- */
+.brands{
+  margin: 100px auto;
+}
+.coll-5{
+  width: 20%;
+  border-radius: 5px;
+}
+.coll-5 img{
+  width: 100%;
+  height: 100px;
+  padding: 5px;
+  cursor: pointer;
+  filter: grayscale(100%);
+}
+
+.coll-5 img:hover{
+  filter: grayscale(0);
+}
+
+
+/* --------------media query--------------- */
+@media only screen and (max-width:800px){
+  nav ul{
+      position: absolute;
+      top: 70px;
+      right: 0;
+      background: #333;
+      width: 50%;
+      text-align: center;
+      box-sizing: border-box;
+      overflow: hidden;
+      transition: max-height 0.5s;
+  }
+  nav ul li{
+      display: block;
+      margin-right: 20px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+  }
+
+  nav ul li a{
+      color: #fff;
+  }
+
+  .menu-icon{
+      display: block;
+      cursor: pointer;
+
+  }
+
+  .categories{
+    margin:100px 10px 50px 10px;
+  }
+
+  .categories h3 ,p{
+    display: none;
+  }
+}
+
+
+@media only screen and (max-width:600px){
+  .row{
+      text-align: center;
+  }
+
+  .row-2 h2{
+      font-size: 20px;
+  }
+  .row-2 select{
+      display: block;
+  }
+
+  .coll-2,.coll-3,.coll-4,.coll-5,.footer-col-4,.footer-col-3,.footer-col-2,.footer-col-1{
+      flex-basis: 100%;
+  }
+
+  .testimonial .coll-3{
+    flex-basis: 100%;
+  }
+
+  .singel-product .row{
+      text-align: left;
+  }
+
+  .singel-product .coll-2{
+      padding: 20px 0;
+  }
+
+  .singel-product input{
+      width: 40px;
+      height: 35px;
+  }
+  .singel-product h1{
+      font-size: 26px;
+      line-height: 36px;
+  }
+
+  .cart-info p{
+      display: none;
+  }
+
+  .cart-info img{
+      width: 140px;
+      height: 80px;
+  }
+
+  .cart-page th{
+      font-size: 14px;
+  }
+
+  .cart-page td input{
+      width: 30px;
+      height: 25px;
+  }
+
+  .categories{
+    display: none;
+  }
+
+  .testimonial .coll-3{
+    margin: 10px 0px;
+    padding: 2px;
+  }
+
+
+  .testimonial .coll-3 img{
+    width: 30px;
+    height: 30px;
+    margin-top: 3px;
+    border-radius: 50%;
+  }
+  .testimonial .coll-3 h3{
+    font-weight: 300;
+    color: #555;
+    font-size: 13px;
+  }
+
+  .testimonial .coll-3 .fa{
+    font-size: 13px;
+  }
+  .testimonial .coll-3 p{
+    display: table-row;
+  }
+
+}

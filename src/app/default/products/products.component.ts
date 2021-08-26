@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { brandModel } from 'src/app/models/brand.model';
 import { categoryModel } from 'src/app/models/category.model';
+import { productsModel } from 'src/app/models/products.model';
 import { ProductService } from 'src/app/services/product/product.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-products',
@@ -11,14 +13,16 @@ import { ProductService } from 'src/app/services/product/product.service';
 export class ProductsComponent implements OnInit {
   categories:categoryModel[];
   brands:brandModel[];
-  allProducts: any[];
-  copiedProduct: any[];
+  allProducts: productsModel[];
+  copiedProduct: productsModel[];
+  apiUrl=null;
 
   constructor(
     private proSer: ProductService,
   ) { }
   ngOnInit(): void {
     this.getProduct();
+    this.apiUrl=environment.apiUrl;
   }
 
   getProduct() {
@@ -27,5 +31,5 @@ export class ProductsComponent implements OnInit {
      console.log(this.allProducts);
     });
   }
-  
+
 }

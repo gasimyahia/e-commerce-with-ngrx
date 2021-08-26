@@ -1,23 +1,34 @@
-
-
-<div class="row">
-    <!-- Team member -->
-    <div *ngFor="let pro of allProducts" class="col-xs-12 col-sm-6 col-md-4">
-        <div class="image-flip">
-            <div class="mainflip" >
-                <div class="frontside" style="margin:5px 0px">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <p><img class=" img-fluid" src="assets/phone.jpg"></p>
-                            <h4 class="card-title">pro.name</h4>
-                            <p class="card-text">pro.desc</p>
-                            <p class="card-text">pro.price</p>
-                            <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-cart-plus"></i> Add to Cart</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="small-container">
+  <div class="row row-2">
+      <h2>All Products</h2>
+      <select>
+          <option>Default Sorting</option>
+          <option>Sorting by Price</option>
+          <option>Sortig by Popularity</option>
+          <option>Sortig by Rating</option>
+          <option>Sortig by Sale</option>
+      </select>
+  </div>
+  <div class="row">
+      <div class="coll-4" *ngFor="let product of allProducts">
+          <a ><img src="{{apiUrl}}/{{product.imgpath}}"></a>
+          <a ><h4>{{product.name}}</h4></a>
+          <div class="rating">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star-half-o"></i>
+              <i class="fa fa-star-o"></i>
+              <i class="fa fa-star-o"></i>
+          </div>
+          <p>${{product.price}}</p>
+      </div>
+  </div>
+  <div class="page-btn">
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+      <span>4</span>
+      <span>&#8594;</span>
+  </div>
 </div>
 

@@ -1,4 +1,206 @@
-input.ng-invalid.ng-touched{
+/* You can add global styles to this file, and also import other style files */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: 'Poppins', sans-serif;
+}
+.header{
+  background: #fff;
+}
+
+.container{
+  max-width: 1300px;
+  margin: auto;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.navbar{
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 80px;
+  background: #fff;
+
+}
+
+nav{
+  flex: 1;
+  text-align: right;
+}
+
+nav ul{
+  display: inline-block;
+  list-style-type: none;
+}
+
+nav ul li{
+  display: inline-block;
+  margin-right: 20px;
+}
+
+nav ul li::after{
+  content: '';
+  width:0%;
+  height: 2px;
+  background: #f44336;
+  display: block;
+  margin: auto;
+  transition: 0.5s;
+}
+nav ul li:hover::after{
+  width: 100%;
+}
+
+nav ul li a{
+  text-decoration: none;
+  /* color: #555; */
+  color: #ff523b;
+  font-weight: 600;
+  cursor: pointer;
+}
+p{
+  color: #555;
+}
+
+.logo img{
+  opacity: .8;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.fa-shopping-cart{
+  color: #ff523b;
+  font-size: 24px;
+}
+
+.menu-icon{
+  width: 28px;
+  margin-left: 28px;
+  display: none;
+}
+
+
+
+
+/* --------------media query--------------- */
+@media only screen and (max-width:800px){
+  nav ul{
+      position: absolute;
+      top: 70px;
+      right: 0;
+      background: #333;
+      width: 50%;
+      text-align: center;
+      box-sizing: border-box;
+      overflow: hidden;
+      transition: max-height 0.5s;
+  }
+  nav ul li{
+      display: block;
+      margin-right: 20px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+  }
+
+  nav ul li a{
+      color: #fff;
+  }
+
+  .menu-icon{
+      display: block;
+      cursor: pointer;
+
+  }
+  #menuItems{
+    max-height: 0px;
+  }
+}
+
+.fa-bars{
+  color: #ff523b;
+  font-size: 24px;
+}
+
+
+@media only screen and (max-width:600px){
+  .row{
+      text-align: center;
+  }
+
+  .row-2 h2{
+      font-size: 20px;
+  }
+  .row-2 select{
+      display: block;
+  }
+
+  .col-2,.col-3,.col-4,.col-5,.footer-col-4,.footer-col-3,.footer-col-2,.footer-col-1{
+      flex-basis: 100%;
+  }
+
+  .singel-product .row{
+      text-align: left;
+  }
+
+  .singel-product .col-2{
+      padding: 20px 0;
+  }
+
+  .singel-product input{
+      width: 40px;
+      height: 35px;
+  }
+  .singel-product h1{
+      font-size: 26px;
+      line-height: 36px;
+  }
+
+  .cart-info p{
+      display: none;
+  }
+
+  .cart-info img{
+      width: 140px;
+      height: 80px;
+  }
+
+  .cart-page th{
+      font-size: 14px;
+  }
+
+  .cart-page td input{
+      width: 30px;
+      height: 25px;
+  }
+
+  #menuItems{
+    max-height: 0px;
+  }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* input.ng-invalid.ng-touched{
     border: 1px solid red;
   }
   .client-avatar {
@@ -10,4 +212,4 @@ input.ng-invalid.ng-touched{
   .user-log{
     background-color: #e4e3e3;
     color: #0c0c3c;
-  }
+  } */
