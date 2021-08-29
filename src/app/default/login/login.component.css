@@ -1,0 +1,117 @@
+/* ---------------account page--------------- */
+.account-page{
+  margin-top: 80px;
+  padding:50px 0;
+  min-height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(rgba(4,9,30,0.4),rgba(4,9,30,0.4)),
+  url("../../../assets/account-img.jpg");
+  background-position: center;
+  background-size: cover;
+}
+.form-container{
+  background: linear-gradient(to top,rgba(0,0,0,0.5)50%,rgba(0,0,0,0.5)50%);
+  width: 300px;
+  height: 400px;
+  position: relative;
+  text-align: center;
+  padding: 20px;
+  margin: auto;
+  box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.form-container span{
+  font-weight: bold;
+  padding: 0 10px;
+  color: #555;
+  cursor: pointer;
+  width: 100px;
+  display: inline-block;
+}
+
+.form-btn
+{
+  display: inline-block;
+}
+
+.form-btn span{
+  color: #fff;
+}
+
+.form-container form{
+  max-width: 300px;
+  padding: 0 20px;
+  position: absolute;
+  top: 130px;
+  transition: transform 1s;
+}
+
+.form-container form input{
+  width: 100%;
+  height: 30px;
+  margin: 10px 0;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+}
+
+.form-container form .bbtn{
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  margin: none;
+}
+.form-container form input{
+  border-radius: 10px;
+}
+
+.form-container form .bbtn:focus{
+  outline: none;
+}
+#loginForm{
+  left: -300px;
+}
+#regForm{
+  left: 0;
+}
+.form-container form a{
+  color: #555;
+  font-size: 12px;
+}
+
+#indicator{
+  width: 100px;
+  border: none;
+  background: #ff523b;
+  height: 3px;
+  margin-top: 8px;
+  transform: translateX(100px);
+  transition: transform 1s;
+}
+
+.account-page .para{
+  padding-left: 20px;
+  padding-bottom: 25px;
+  font-family: Arial;
+  letter-spacing: 1.2px;
+  line-height: 30px;
+  color: #fff;
+}
+
+
+.account-page h1{
+  font-family: 'Times New Roman';
+  font-size: 50px;
+  padding-left: 20px;
+  margin-top: 9%;
+  letter-spacing: 2px;
+  color: #fff;
+}
+
+.account-page .coll-2 h1 span{
+  color: #ff7200;
+  font-size: 60px;
+}
+
+

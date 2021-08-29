@@ -36,6 +36,10 @@ export class ProductService {
     });
   }
 
+  public getProductById(keys){
+    return this.http.post(this.baseURL+"single-product?keys="+keys,null);
+  }
+
   getProductByCatId(categoryId?: number){
     this.Products.subscribe(res=>{
       let products=res;

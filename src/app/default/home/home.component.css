@@ -5,3 +5,6 @@
 .row2 h2{
   color: #555;
 }
+.product img,h4{
+  cursor: pointer;
+}

@@ -10,9 +10,9 @@
       </select>
   </div>
   <div class="row">
-      <div class="coll-4" *ngFor="let product of allProducts">
-          <a ><img src="{{apiUrl}}/{{product.imgpath}}"></a>
-          <a ><h4>{{product.name}}</h4></a>
+      <div class="coll-4 product" *ngFor="let product of allProducts">
+          <a ><img src="{{apiUrl}}/{{product.imgpath}}" (click)="ProductDetails(product.id)"></a>
+          <a ><h4 (click)="ProductDetails(product.id)">{{product.name}}</h4></a>
           <div class="rating">
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>

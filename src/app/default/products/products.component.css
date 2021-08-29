@@ -29,3 +29,7 @@
   background: #ff523b;
   color: white;
 }
+
+.product img,h4{
+  cursor: pointer;
+}

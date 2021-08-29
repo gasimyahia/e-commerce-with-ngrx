@@ -1,18 +1,43 @@
-<!-- <form [formGroup]="LoginForm" (ngSubmit)="onLogin()">
-    <div class="container-fluid">
-    <div class="row">
-        <div class="col">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" formControlName="name">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <label for="name">Password</label>
-            <input type="password" class="form-control" id="name" formControlName="password">
-        </div>
-    </div>
-    </div>
-    <button type="button" class="btn btn-light" (click)="modal.close('Close click')" (click)="resetForm(LoginForm)">Concel</button>
-    <button type="submit" class="btn btn-primary" [disabled]="!LoginForm.valid">Login</button>
-</form> -->
+<!------------account page--------------->
+<div class="account-page">
+  <div class="container">
+      <div class="row">
+          <div class="coll-2">
+            <h1>Some Text about <br><span>Businiss</span><br>Some Text</h1>
+            <p class="para">Every Web Developer must have a basic understanding of HTML, CSS, and JavaScript.<br>
+                Responsive Web Design is used in all types of modern web development.
+            </p>
+          </div>
+          <div class="coll-2">
+              <div class="form-container">
+                  <div class="form-btn">
+                      <span (click)="toggleLogin()">Login</span>
+                      <span (click)="toggleRegister()">Register</span>
+                      <hr id="indicator">
+                  </div>
+                  <div class="form-btn" *ngIf="submitted &&  errorMessage != null" style="color:red; text-align: center;">
+                    <p><b>{{errorMessage}}</b></p>
+                  </div>
+                  <form id="loginForm" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                      <input type="text" placeholder="Username" [ngClass]="{'is-invalid' : submitted && f.email.errors}" formControlName="email">
+                      <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email is Required</div>
+                      </div>
+                      <input type="password" placeholder="Password" [ngClass]="{'is-invalid' : submitted && f.password.errors}" formControlName="password">
+                      <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Password is Required</div>
+                      </div>
+                      <button type="submit" class="bbtn">Login</button>
+                      <a href="#">Forgot Password</a>
+                  </form>
+                  <form id="regForm">
+                      <input type="text" placeholder="Username">
+                      <input type="email" placeholder="Email">
+                      <input type="password" placeholder="Password">
+                      <button type="submit" class="bbtn">Login</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

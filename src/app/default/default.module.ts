@@ -14,9 +14,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AboutComponent } from './about/about.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { ToastComponent } from './toast/toast.component';
-import { ShowComponent } from './products/show/show.component';
+
 import { HomeComponent } from './home/home.component';
 import { AppFooterComponent } from './app-footer/app-footer.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 
 
 
@@ -31,9 +32,9 @@ import { AppFooterComponent } from './app-footer/app-footer.component';
     AboutComponent,
     ContactusComponent,
     ToastComponent,
-    ShowComponent,
     HomeComponent,
-    AppFooterComponent
+    AppFooterComponent,
+    ProductDetailsComponent
   ],
   imports: [
     CommonModule,

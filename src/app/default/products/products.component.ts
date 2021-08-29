@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { brandModel } from 'src/app/models/brand.model';
 import { categoryModel } from 'src/app/models/category.model';
 import { productsModel } from 'src/app/models/products.model';
@@ -19,6 +20,7 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private proSer: ProductService,
+    private router:Router
   ) { }
   ngOnInit(): void {
     this.getProduct();
@@ -28,8 +30,11 @@ export class ProductsComponent implements OnInit {
   getProduct() {
    this.proSer.allProducts.subscribe(res=>{
      this.allProducts=res;
-     console.log(this.allProducts);
     });
+  }
+
+  ProductDetails(id: any) {
+    this.router.navigate([`/products/${id}`]);
   }
 
 }

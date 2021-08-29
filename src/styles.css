@@ -358,4 +358,8 @@ small{
     display: table-row;
   }
 
+  .account-page h1{
+    font-size: 25px;
+  }
+
 }

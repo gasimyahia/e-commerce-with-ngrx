@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { brandModel } from 'src/app/models/brand.model';
 import { categoryModel } from 'src/app/models/category.model';
 import { productsModel } from 'src/app/models/products.model';
@@ -23,6 +24,7 @@ export class HomeComponent implements OnInit {
     private proSer:ProductService,
     private categoryService:CategoryService,
     private brandService:BrandService,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
@@ -41,6 +43,10 @@ export class HomeComponent implements OnInit {
       this.allProducts=res;
      });
     this.apiUrl=environment.apiUrl;
+  }
+
+  ProductDetails(id: any) {
+    this.router.navigate([`/products/${id}`]);
   }
 
 }
