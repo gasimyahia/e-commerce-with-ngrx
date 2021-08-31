@@ -1,4 +1,8 @@
 /* ---------------account page--------------- */
+.input-valid input.ng-invalid.ng-touched{
+  border: 1px solid red;
+}
+
 .account-page{
   margin-top: 80px;
   padding:50px 0;
@@ -12,7 +16,7 @@
 .form-container{
   background: linear-gradient(to top,rgba(0,0,0,0.5)50%,rgba(0,0,0,0.5)50%);
   width: 300px;
-  height: 400px;
+  height: 450px;
   position: relative;
   text-align: center;
   padding: 20px;
@@ -45,7 +49,7 @@
   padding: 0 20px;
   position: absolute;
   top: 130px;
-  transition: transform 1s;
+  transition: transform 0.5s;
 }
 
 .form-container form input{
@@ -55,7 +59,6 @@
   padding: 0 10px;
   border: 1px solid #ccc;
 }
-
 .form-container form .bbtn{
   width: 100%;
   border: none;
@@ -87,7 +90,7 @@
   height: 3px;
   margin-top: 8px;
   transform: translateX(100px);
-  transition: transform 1s;
+  transition: transform 0.5s;
 }
 
 .account-page .para{

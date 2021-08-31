@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { brandModel } from 'src/app/models/brand.model';
+import { cartModel } from 'src/app/models/cart.model';
 import { categoryModel } from 'src/app/models/category.model';
 import { productsModel } from 'src/app/models/products.model';
 import { BrandService } from 'src/app/services/brand/brand.service';
+import { CartService } from 'src/app/services/cart/cart.service';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { ProductService } from 'src/app/services/product/product.service';
 import { environment } from 'src/environments/environment';
@@ -24,6 +26,7 @@ export class HomeComponent implements OnInit {
     private proSer:ProductService,
     private categoryService:CategoryService,
     private brandService:BrandService,
+    private cartService:CartService,
     private router:Router
   ) { }
 
@@ -47,6 +50,19 @@ export class HomeComponent implements OnInit {
 
   ProductDetails(id: any) {
     this.router.navigate([`/products/${id}`]);
+  }
+
+  addToCart(id:number){
+    let cartItem;
+    this.allProducts.forEach(pro =>{
+      if(pro.id==id){
+        cartItem=new cartModel(pro.id,pro.name,pro.price,pro.imgpath,1);
+        console.log(cartItem);
+        this.cartService.addCartItems(cartItem);
+
+      }
+    })
+
   }
 
 }

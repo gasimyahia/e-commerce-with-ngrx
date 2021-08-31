@@ -13,13 +13,26 @@
         </ul>
     </nav>
     <div class="cart">
-        <a ><i class="fa fa-shopping-cart"></i></a>
+        <a (click)="openCart()"><i class="fa fa-shopping-cart"></i></a>
     </div>
+    <div class="cart" *ngIf="isLogin">
+      <ul class="nav">
+        <li><a >
+          <i class="fa fa-user-circle-o"></i>
+        </a>
+          <ul class="sub-nav">
+            <li><a ><i class="fa fa-user-md"></i>Profile</a></li>
+            <li><a (click)="logout()"><i class="fa fa-sign-out"></i>Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
     <a  class="menu-icon" (click)="menuToggle()"><i class="fa fa-bars"></i></a>
   </div>
 </div>
 
-
+<app-toast aria-live="polite" aria-atomic="true"></app-toast>
 
 
 

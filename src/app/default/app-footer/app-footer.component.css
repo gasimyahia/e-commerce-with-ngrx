@@ -36,7 +36,7 @@
 
 .footer-col-3 ,.footer-col-4{
   flex-basis: 15%;
-  text-align: center;
+  text-align: left;
 }
 .footer-col-4 ul,.footer-col-3 ul{
   list-style: none;
@@ -63,8 +63,14 @@
   text-align: center;
 }
 
-.fa-facebook{
+.footer .fa{
   color: #ff523b;
+  font-size: 18px;
+  padding: 5px;
+}
+
+.footer-col-4{
+  align-items: flex-start;
 }
 
 
@@ -98,6 +104,8 @@
       cursor: pointer;
 
   }
+
+
 }
 
 
@@ -177,6 +185,10 @@
     display: block;
     cursor: pointer;
  }
+
+ .footer-col-3 ,.footer-col-4{
+  text-align: center;
+}
 
 
 }

@@ -16,7 +16,7 @@ body{
   max-width: 1300px;
   margin: auto;
   padding-left: 25px;
-  padding-right: 25px;
+  padding-right: 0px;
 }
 
 .navbar{
@@ -88,6 +88,36 @@ p{
 .fa-shopping-cart{
   cursor: pointer;
 }
+.cart .fa-shopping-cart{
+  margin-right: 20px;
+}
+
+.cart .fa-user-circle-o{
+  margin-left: 30px;
+  font-size: 24px;
+  color: #ff523b;
+}
+.cart a{
+  cursor: pointer;
+}
+
+.menu {
+	margin: 0;
+	display: flex;
+	list-style: none;
+}
+
+.menu a {
+  position: relative;
+  z-index: 2;
+  display: block;
+  letter-spacing: 0.01rem;
+  padding: 1rem 1rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.25rem;
+  transition: 0.2s;
+}
 
 
 
@@ -130,6 +160,10 @@ p{
   color: #ff523b;
   font-size: 24px;
 }
+
+/* .cart .nav{
+  display: none;
+} */
 
 
 @media only screen and (max-width:600px){
@@ -187,33 +221,91 @@ p{
     max-height: 0px;
   }
 
+  /* .cart .nav{
+    display: none;
+  } */
+
 
 }
 
 
 
 
+.nav {
+  list-style: none;
+}
 
+.nav li {
+  list-style-type: none;
+  float: left; /*1*/
+  position: relative; /*2*/
 
+}
 
+.sub-nav li{
+  width: 100px;
+  align-items: center;
+  background: radial-gradient(#fff,#ffd6d6);
+}
 
+.nav > li:first-of-type, /* 1 */
+.nav > li:first-of-type a { /* 2 */
+  border-radius: 5px 0 0 5px;
+}
 
+.nav > li:last-of-type, /* 1 */
+.nav > li:last-of-type a { /* 2 */
+  border-radius: 0 5px 5px 0;
+}
 
+.nav li a {
+  display: block; /*1*/
+  padding: 10px 12px;
+  text-decoration: none; /*2*/
+  color: #555;
+  transition: all ease .5s; /*3*/
+}
+.nav:hover li a {
+  opacity: .5;
+  transition: all ease .5s;
+}
 
+.nav li:hover a {
+  opacity: 1;
+}
 
+.sub-nav {
+  position: absolute; /*1*/
+  border-top: 15px solid transparent; /*2*/
+  left: -9999px /*3*/
+}
 
+.nav li:hover > .sub-nav {
+  left: 0;
+}
 
+.sub-nav li {
+  white-space: nowrap; /*1*/
+  padding: 1px; /*2*/
+}
 
-/* input.ng-invalid.ng-touched{
-    border: 1px solid red;
-  }
-  .client-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-  }
+.sub-nav > li:first-of-type {
+  border-radius: 5px 5px 0 0; /*1*/
+}
 
-  .user-log{
-    background-color: #e4e3e3;
-    color: #0c0c3c;
-  } */
+.sub-nav > li:last-of-type {
+  border-radius: 0 0 5px 5px; /*1*/
+}
+
+.sub-nav a {
+  font-size: 90%; /*1*/
+  transition: background ease .3s; /*3*/
+}
+
+.sub-nav .fa-sign-out{
+  color: #ff523b;
+}
+
+/* .sub-nav a:hover {
+  background: #3498DB;
+} */

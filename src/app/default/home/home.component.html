@@ -104,7 +104,7 @@
     <div class="small-container">
         <div class="row">
             <div class="coll-2">
-                <a href="product.details.html"><img class="offer-img" src="{{apiUrl}}/{{allProducts[allProducts.length-1].imgpath}}" width="150px" height="400px"></a>
+              <img class="offer-img" src="{{apiUrl}}/{{allProducts[allProducts.length-1].imgpath}}" width="150px" height="400px">
             </div>
             <div class="coll-2">
                 <p>{{allProducts[allProducts.length-1].cat_name}}</p>
@@ -113,7 +113,7 @@
                   {{allProducts[allProducts.length-1].desc}}
                 </small>
                 <br>
-                <a href="#" class="bbtn">Buy New &#8594;</a>
+                <a class="bbtn" (click)="addToCart(allProducts[allProducts.length-1].id)">Buy New &#8594;</a>
             </div>
         </div>
     </div>
@@ -193,3 +193,4 @@
         </div>
     </div>
 </div>
+<app-toast aria-live="polite" aria-atomic="true"></app-toast>

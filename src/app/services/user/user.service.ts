@@ -7,12 +7,12 @@ import { userModel } from 'src/app/models/user.model';
   providedIn: 'root'
 })
 export class UserService {
-  isLogin=false;
+  public isLogin=false;
   private baseURL="http://localhost:8000/api/user/";
   allUsers=new BehaviorSubject<userModel[]>(null);
 
-  constructor(private http:HttpClient) 
-  { 
+  constructor(private http:HttpClient)
+  {
     if(localStorage.getItem("pm_user") != null)
     {
       this.isLogin=true;
@@ -44,5 +44,12 @@ export class UserService {
 
   getCategories(){
     return this.http.post(this.baseURL,null);
+  }
+
+  isAuthenticated(){
+    return this.isLogin;
+  }
+  setAuthenticated(key){
+     this.isLogin=key;
   }
 }

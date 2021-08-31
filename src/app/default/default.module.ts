@@ -18,6 +18,7 @@ import { ToastComponent } from './toast/toast.component';
 import { HomeComponent } from './home/home.component';
 import { AppFooterComponent } from './app-footer/app-footer.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { CartComponent } from './cart/cart.component';
 
 
 
@@ -34,7 +35,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     ToastComponent,
     HomeComponent,
     AppFooterComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    CartComponent
   ],
   imports: [
     CommonModule,

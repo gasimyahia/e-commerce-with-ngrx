@@ -11,6 +11,7 @@ import { ProductService } from './services/product/product.service';
 import { BrandService } from './services/brand/brand.service';
 import { CategoryService } from './services/category/category.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { AuthGurad } from './services/user/auth-gurad.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
     HttpClientModule,
     ToastrModule.forRoot()
   ],
-  providers: [ToastService,ToastrService,ProductService,BrandService,CategoryService],
+  providers: [ToastService,ToastrService,ProductService,BrandService,CategoryService,AuthGurad],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

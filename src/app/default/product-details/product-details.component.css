@@ -56,3 +56,12 @@
 .view-more{
   cursor: pointer;
 }
+
+.singel-product a{
+  text-decoration: none;
+  color: white;
+}
+
+.singel-product a:hover{
+  color: white;
+}

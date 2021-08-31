@@ -8,3 +8,11 @@
 .product img,h4{
   cursor: pointer;
 }
+.offer a{
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.offer a:hover{
+  color: white;
+}

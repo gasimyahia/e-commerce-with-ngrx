@@ -15,29 +15,25 @@
                       <span (click)="toggleRegister()">Register</span>
                       <hr id="indicator">
                   </div>
-                  <div class="form-btn" *ngIf="submitted &&  errorMessage != null" style="color:red; text-align: center;">
-                    <p><b>{{errorMessage}}</b></p>
+                  <div class="form-btn" *ngIf="submitted &&  errorMessage != null">
+                    <p style="color:red; text-align: center;" id="perror">{{errorMessage}}</p>
                   </div>
                   <form id="loginForm" [formGroup]="loginForm" (ngSubmit)="onLogin()">
-                      <input type="text" placeholder="Username" [ngClass]="{'is-invalid' : submitted && f.email.errors}" formControlName="email">
-                      <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
-                        <div *ngIf="f.email.errors.required">Email is Required</div>
-                      </div>
-                      <input type="password" placeholder="Password" [ngClass]="{'is-invalid' : submitted && f.password.errors}" formControlName="password">
-                      <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
-                        <div *ngIf="f.email.errors.required">Password is Required</div>
-                      </div>
-                      <button type="submit" class="bbtn">Login</button>
+                      <input type="text" placeholder="Username" formControlName="email">
+                      <input type="password" placeholder="Password" formControlName="password">
+                      <button type="submit" class="bbtn" >Login <i class="fa fa-sign-in"></i></button>
                       <a href="#">Forgot Password</a>
                   </form>
-                  <form id="regForm">
-                      <input type="text" placeholder="Username">
-                      <input type="email" placeholder="Email">
-                      <input type="password" placeholder="Password">
-                      <button type="submit" class="bbtn">Login</button>
+                  <form id="regForm" [formGroup]="registerForm" (ngSubmit)="onRegister()">
+                      <input type="text" placeholder="Username" formControlName="name">
+                      <input type="email" placeholder="Email" formControlName="email">
+                      <input type="password" placeholder="Password" formControlName="password">
+                      <input type="password" placeholder="Confirm Password" formControlName="cpassword">
+                      <button type="submit" class="bbtn">Register <i class="fa fa-sign-in"></i></button>
                   </form>
               </div>
           </div>
       </div>
   </div>
 </div>
+<app-toast aria-live="polite" aria-atomic="true"></app-toast>
