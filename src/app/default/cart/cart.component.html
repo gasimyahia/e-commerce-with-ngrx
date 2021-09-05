@@ -1,55 +1,25 @@
   <!------------cart details--------------->
-  <div class="small-container cart-page">
-    <table>
+  <div class="small-container cart-page" *ngIf="cartItems != null">
+    <table id="cart-item">
         <tr>
             <th>Product</th>
             <th>Quantity</th>
             <th>Subtoatal</th>
         </tr>
-        <tr>
+        <tr *ngFor="let cartitem of cartItems">
             <td>
-                <div class="cart-info">
-                    <img src="./images/cat4.jfif">
-                    <div class="pro-info">
-                        <p>Product name</p>
-                        <small>Price : $60.00</small>
-                        <br>
-                        <a href="#" >Remove</a>
-                    </div>
-                </div>
+              <div class="cart-info">
+                  <img src="{{apiUrl}}/{{cartitem.image}}">
+                  <div class="pro-info">
+                      <p>{{cartitem.name}}</p>
+                      <small>Price : ${{cartitem.price}}</small>
+                      <br>
+                      <a (click)="deleteItem(cartitem)" ><i class="fa fa-trash"></i></a>
+                  </div>
+              </div>
             </td>
-            <td><input type="number" value="1"></td>
-            <td>$50.00</td>
-        </tr>
-        <tr>
-            <td>
-                <div class="cart-info">
-                    <img src="./images/cat2.jfif">
-                    <div class="pro-info">
-                        <p>Product name</p>
-                        <small>Price : $60.00</small>
-                        <br>
-                        <a href="#" >Remove</a>
-                    </div>
-                </div>
-            </td>
-            <td><input type="number" value="1"></td>
-            <td>$50.00</td>
-        </tr>
-        <tr>
-            <td>
-                <div class="cart-info">
-                    <img src="./images/cat1.jfif">
-                    <div class="pro-info">
-                        <p>Product name</p>
-                        <small>Price : $60.00</small>
-                        <br>
-                        <a href="#" >Remove</a>
-                    </div>
-                </div>
-            </td>
-            <td><input type="number" value="1"></td>
-            <td>$50.00</td>
+            <td>{{cartitem.quantity}}</td>
+            <td>${{cartitem.quantity * cartitem.price}}</td>
         </tr>
     </table>
 
@@ -57,7 +27,7 @@
         <table>
             <tr>
                 <td>Total</td>
-                <td>$200.00</td>
+                <td>${{totalAmount}}</td>
             </tr>
             <!-- <tr>
                 <td>Tax</td>
@@ -69,4 +39,11 @@
             </tr> -->
         </table>
     </div>
+
+</div>
+
+<div class="small-container cart-page" *ngIf="cartItems===null">
+  <div class="no-data">
+    <h3>No Item in Cart</h3>
+  </div>
 </div>

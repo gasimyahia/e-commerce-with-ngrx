@@ -6,18 +6,31 @@ import { cartModel } from 'src/app/models/cart.model';
   providedIn: 'root'
 })
 export class CartService {
-
-  constructor() { }
   changedCartItems=new BehaviorSubject<cartModel[]>(null);
   private cartItems:cartModel[]=null;
+
+  constructor() { }
+
 
   setCartItems(cartItems:cartModel[]){
     this.cartItems=cartItems;
     this.changedCartItems.next(this.cartItems.slice());
   }
 
+  // getCartItems(){
+  //   if(this.cartItems !=null){
+  //     return this.cartItems.slice();
+  //   }else{
+  //     return this.cartItems;
+  //   }
+  // }
+
   getCartItems(){
-    return this.cartItems.slice();
+    if(this.cartItems !=null){
+      return this.cartItems.slice();
+    }else{
+      return this.cartItems;
+    }
   }
 
   getCartItem(index:number){
@@ -25,16 +38,50 @@ export class CartService {
   }
 
   addCartItems(cartItem:cartModel){
-    this.cartItems.push(cartItem);
+    let itemsExists:boolean=false;
+    if(this.cartItems===null){
+      this.cartItems=[cartItem];
+    }else{
+      this.cartItems.forEach(pro=>{
+        if(pro.id==cartItem.id){
+          itemsExists=true
+        }
+      });
+
+      if(itemsExists){
+        for (let key=0 ;key<this.cartItems.length;key++) {
+          if(this.cartItems[key].id==cartItem.id){
+            this.cartItems[key].quantity=this.cartItems[key].quantity + cartItem.quantity;
+          }
+        }
+      }else{
+        this.cartItems.push(cartItem);
+      }
+
+    }
+
     this.changedCartItems.next(this.cartItems.slice());
+    console.log(this.cartItems);
   }
 
-  updateRecipe(index:number,newCartItem:cartModel){
+  updateCartItem(newCartItem:cartModel){
+    let index:number=null;
+    for (let key=0 ;key<this.cartItems.length;key++) {
+      if(this.cartItems[key].id==newCartItem.id){
+        index=key;
+      }
+    }
     this.cartItems[index]=newCartItem;
     this.changedCartItems.next(this.cartItems.slice());
   }
 
-  deleteRecipe(index:number){
+  deleteCartItems(id:number){
+    let index:number=null;
+    for (let key=0 ;key<this.cartItems.length;key++) {
+      if(this.cartItems[key].id==id){
+        index=key;
+      }
+    }
     this.cartItems.splice(index,1);
     this.changedCartItems.next(this.cartItems.slice());
   }

@@ -13,7 +13,16 @@
         </ul>
     </nav>
     <div class="cart">
-        <a (click)="openCart()"><i class="fa fa-shopping-cart"></i></a>
+      <ul class="nav">
+        <li><a >
+          <a (click)="openCart()"><i class="fa fa-shopping-cart"></i></a>
+        </a>
+          <!-- <ul class="sub-nav shop2">
+            <li class="shop"><a (click)="openCart()">({{itemAccount}})</a></li>
+          </ul> -->
+        </li>
+      </ul>
+
     </div>
     <div class="cart" *ngIf="isLogin">
       <ul class="nav">

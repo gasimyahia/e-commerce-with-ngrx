@@ -122,6 +122,7 @@ p{
 
 
 
+
 /* --------------media query--------------- */
 @media only screen and (max-width:800px){
   nav ul{
@@ -304,6 +305,16 @@ p{
 
 .sub-nav .fa-sign-out{
   color: #ff523b;
+}
+
+.sub-nav .shop {
+  width: 70px;
+  border-radius: 10px;
+}
+
+
+.shop a{
+  text-align: center;
 }
 
 /* .sub-nav a:hover {

@@ -30,8 +30,10 @@
                       <option >Medium</option>
                       <option >Small</option>
                   </select> -->
-                  <input type="number" value="1">
-                  <a  class="bbtn">Add to Card</a>
+                  <form id="loginForm" [formGroup]="cartForm">
+                    <input type="number" min="1" formControlName="quantity">
+                  </form>
+                  <a  class="bbtn" (click)="addToCart(Product)">Add to Card</a>
                   <h3>
                       Product Details <i class="fa fa-indent"></i>
                   </h3>

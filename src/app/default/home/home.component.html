@@ -113,7 +113,7 @@
                   {{allProducts[allProducts.length-1].desc}}
                 </small>
                 <br>
-                <a class="bbtn" (click)="addToCart(allProducts[allProducts.length-1].id)">Buy New &#8594;</a>
+                <a class="bbtn" (click)="addToCart(allProducts[allProducts.length-1])">Buy New &#8594;</a>
             </div>
         </div>
     </div>
@@ -193,4 +193,6 @@
         </div>
     </div>
 </div>
+
+
 <app-toast aria-live="polite" aria-atomic="true"></app-toast>

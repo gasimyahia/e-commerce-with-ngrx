@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CartService } from 'src/app/services/cart/cart.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
 import { UserService } from 'src/app/services/user/user.service';
 
@@ -11,16 +12,21 @@ import { UserService } from 'src/app/services/user/user.service';
 export class TopbarComponent implements OnInit {
   isLogin=false;
   errorMessage:any='';
-  public openNav: boolean = false
+  public openNav: boolean = false;
+  itemAccount:number=0;
 
   constructor(
               public toastService: ToastService,
               public userService:UserService,
+              private cartService:CartService,
               private router:Router
             ) { }
 
   ngOnInit(): void {
     this.isLogin=this.userService.isAuthenticated();
+    if(this.cartService.getCartItems != null){
+      this.itemAccount=this.cartService.getCartItems.length;
+    }
   }
 
 

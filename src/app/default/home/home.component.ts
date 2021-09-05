@@ -8,6 +8,7 @@ import { BrandService } from 'src/app/services/brand/brand.service';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { ProductService } from 'src/app/services/product/product.service';
+import { ToastService } from 'src/app/services/toast/toast.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -27,6 +28,7 @@ export class HomeComponent implements OnInit {
     private categoryService:CategoryService,
     private brandService:BrandService,
     private cartService:CartService,
+    public toastService: ToastService,
     private router:Router
   ) { }
 
@@ -52,17 +54,14 @@ export class HomeComponent implements OnInit {
     this.router.navigate([`/products/${id}`]);
   }
 
-  addToCart(id:number){
-    let cartItem;
-    this.allProducts.forEach(pro =>{
-      if(pro.id==id){
-        cartItem=new cartModel(pro.id,pro.name,pro.price,pro.imgpath,1);
-        console.log(cartItem);
-        this.cartService.addCartItems(cartItem);
+  addToCart(product:productsModel){
+    let cartItem=new cartModel(product.id,product.name,product.price,product.imgpath,1);
+    this.cartService.addCartItems(cartItem);
+    this.toastSuccess("Product added to Cart Successfuly");
+  }
 
-      }
-    })
-
+  toastSuccess(message) {
+    this.toastService.show(message, { classname: 'bg-info text-light', delay: 5000 });
   }
 
 }
