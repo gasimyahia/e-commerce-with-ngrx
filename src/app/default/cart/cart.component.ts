@@ -1,24 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { Update } from '@ngrx/entity';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { cartModel } from 'src/app/models/cart.model';
-import { CartService } from 'src/app/services/cart/cart.service';
+import { Cart } from 'src/app/models/carts.module';
+import { AppState } from 'src/app/store/app.state';
 import { environment } from 'src/environments/environment';
+import { deleteItemFromCart, updateCartItem } from './state/cart.actions';
+import { getCartItems } from './state/cart.selector';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent implements OnInit {
-  cartItems:cartModel[]=null;
+export class CartComponent implements OnInit ,OnDestroy {
+  cartItems:Cart[];
+  subscription:Subscription;
   apiUrl:any;
   totalAmount:number=0;
   cartForm:FormGroup;
 
-  constructor(private cartService:CartService,private formBulider:FormBuilder) { }
+  constructor(private store:Store<AppState>) { }
 
   ngOnInit(): void {
-    this.cartItems=this.cartService.getCartItems();
+    this.subscription=this.store.select(getCartItems).subscribe(data=>{
+      if(data.values != null){
+        this.cartItems=data;
+      }
+    });
     this.totalAmount=this.calcTotal(this.cartItems);
     this.apiUrl=environment.apiUrl;
   }
@@ -33,20 +44,48 @@ export class CartComponent implements OnInit {
     return total;
   }
 
-  deleteItem(item:cartModel){
-    this.cartService.deleteCartItems(item.id);
-    let index:number=null;
-    for (let key=0 ;key<this.cartItems.length;key++) {
-      if(this.cartItems[key].id==item.id){
-        index=key;
-      }
-    }
-    this.cartItems.splice(index,1);
+  deleteItem(id:number){
+    this.store.dispatch(deleteItemFromCart({id}))
     if(this.cartItems.length==0)
     this.cartItems=null;
     this.totalAmount=this.calcTotal(this.cartItems);
   }
 
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+  }
 
+  plus(item:Cart){
+   const qty:number=item.quantity + 1;
+    const updateCart:Update<Cart>={
+      id:item.id,
+      changes:{
+        name:item.name,
+        price:item.price,
+        image:item.image,
+        quantity:qty
+      }
+    }
+    this.store.dispatch(updateCartItem({cartItem:updateCart}));
+    this.totalAmount=this.calcTotal(this.cartItems);
+  }
+
+  minus(item:Cart){
+    if(item.quantity <= 1){
+      return
+    }
+    const qty:number=item.quantity - 1;
+    const updateCart:Update<Cart>={
+      id:item.id,
+      changes:{
+        name:item.name,
+        price:item.price,
+        image:item.image,
+        quantity:qty
+      }
+    }
+    this.store.dispatch(updateCartItem({cartItem:updateCart}));
+    this.totalAmount=this.calcTotal(this.cartItems);
+  }
 
 }

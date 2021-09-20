@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { brandModel } from 'src/app/models/brand.model';
 import { cartModel } from 'src/app/models/cart.model';
 import { categoryModel } from 'src/app/models/category.model';
@@ -9,7 +10,9 @@ import { CartService } from 'src/app/services/cart/cart.service';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { ProductService } from 'src/app/services/product/product.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
+import { AppState } from 'src/app/store/app.state';
 import { environment } from 'src/environments/environment';
+import { addItemToCart } from '../cart/state/cart.actions';
 
 @Component({
   selector: 'app-home',
@@ -27,8 +30,8 @@ export class HomeComponent implements OnInit {
     private proSer:ProductService,
     private categoryService:CategoryService,
     private brandService:BrandService,
-    private cartService:CartService,
     public toastService: ToastService,
+    private store:Store<AppState>,
     private router:Router
   ) { }
 
@@ -56,7 +59,8 @@ export class HomeComponent implements OnInit {
 
   addToCart(product:productsModel){
     let cartItem=new cartModel(product.id,product.name,product.price,product.imgpath,1);
-    this.cartService.addCartItems(cartItem);
+    this.store.dispatch(addItemToCart({cartItem}));
+    // this.cartService.addCartItems(cartItem);
     this.toastSuccess("Product added to Cart Successfuly");
   }
 

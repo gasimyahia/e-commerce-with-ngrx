@@ -1,5 +1,5 @@
   <!------------cart details--------------->
-  <div class="small-container cart-page" *ngIf="cartItems != null">
+  <div class="small-container cart-page" *ngIf="cartItems != null"  >
     <table id="cart-item">
         <tr>
             <th>Product</th>
@@ -14,11 +14,18 @@
                       <p>{{cartitem.name}}</p>
                       <small>Price : ${{cartitem.price}}</small>
                       <br>
-                      <a (click)="deleteItem(cartitem)" ><i class="fa fa-trash"></i></a>
+                      <a (click)="deleteItem(cartitem.id)" ><i class="fa fa-trash"></i></a>
                   </div>
               </div>
             </td>
-            <td>{{cartitem.quantity}}</td>
+            <td>{{cartitem.quantity}}
+              <div class="cssCircle minusSign" style="padding-top:00px" (click)="minus(cartitem)">
+                &#8211;
+              </div>
+              <div class="cssCircle plusSign" (click)="plus(cartitem)">
+                &#43;
+              </div>
+            </td>
             <td>${{cartitem.quantity * cartitem.price}}</td>
         </tr>
     </table>
@@ -42,7 +49,7 @@
 
 </div>
 
-<div class="small-container cart-page" *ngIf="cartItems===null">
+<div class="small-container cart-page" *ngIf="cartItems == null">
   <div class="no-data">
     <h3>No Item in Cart</h3>
   </div>

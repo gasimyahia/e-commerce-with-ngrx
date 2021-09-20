@@ -1,32 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { getCartItems } from '../cart/state/cart.selector';
 
 @Component({
   selector: 'app-topbar',
   templateUrl: './topbar.component.html',
   styleUrls: ['./topbar.component.css']
 })
-export class TopbarComponent implements OnInit {
+export class TopbarComponent implements OnInit , OnDestroy{
   isLogin=false;
   errorMessage:any='';
   public openNav: boolean = false;
   itemAccount:number=0;
+  subscription:Subscription
 
   constructor(
               public toastService: ToastService,
               public userService:UserService,
-              private cartService:CartService,
+              private store:Store,
               private router:Router
             ) { }
 
   ngOnInit(): void {
     this.isLogin=this.userService.isAuthenticated();
-    if(this.cartService.getCartItems != null){
-      this.itemAccount=this.cartService.getCartItems.length;
-    }
+    this.subscription=this.store.select(getCartItems).subscribe(data=>{
+      if(data != null){
+        this.itemAccount=data.length;
+      }
+    });
   }
 
 
@@ -59,6 +65,10 @@ export class TopbarComponent implements OnInit {
    }
     this.router.navigateByUrl('/cart');
 
+ }
+
+ ngOnDestroy(){
+   this.subscription.unsubscribe();
  }
 
 

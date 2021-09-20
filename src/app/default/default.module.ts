@@ -19,6 +19,10 @@ import { HomeComponent } from './home/home.component';
 import { AppFooterComponent } from './app-footer/app-footer.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { CartComponent } from './cart/cart.component';
+import { EntityDefinitionService } from '@ngrx/data';
+import { StoreModule } from '@ngrx/store';
+import { CART_STATE_NAME } from './cart/state/cart.selector';
+import { cartReducer } from './cart/state/cart.reducer';
 
 
 
@@ -43,9 +47,15 @@ import { CartComponent } from './cart/cart.component';
     DefaultRoutingModule,
     NgbModule,
     ReactiveFormsModule,
+    StoreModule.forFeature(CART_STATE_NAME,cartReducer),
   ],
   providers:[
     ProductsComponent
   ]
 })
-export class DefaultModule { }
+export class DefaultModule {
+  constructor(
+    eds:EntityDefinitionService,
+
+  ){}
+}

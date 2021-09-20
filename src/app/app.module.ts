@@ -12,6 +12,12 @@ import { BrandService } from './services/brand/brand.service';
 import { CategoryService } from './services/category/category.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { AuthGurad } from './services/user/auth-gurad.service';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtools, StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { EntityDataModule } from '@ngrx/data';
+import { AppReducer } from './store/app.state';
 
 @NgModule({
   declarations: [
@@ -23,7 +29,11 @@ import { AuthGurad } from './services/user/auth-gurad.service';
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    StoreModule.forRoot(AppReducer),
+    StoreDevtoolsModule.instrument({logOnly:environment.production}),
+    EffectsModule.forRoot([]),
+    EntityDataModule.forRoot({}),
   ],
   providers: [ToastService,ToastrService,ProductService,BrandService,CategoryService,AuthGurad],
   bootstrap: [AppComponent]
